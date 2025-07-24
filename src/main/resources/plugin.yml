@@ -1,0 +1,4 @@
+name: CoreGame
+version: '1.0'
+main: org.changchenguwu.coregame.main
+api-version: '1.20'
