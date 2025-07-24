@@ -27,3 +27,17 @@ api-version: '1.20'
 #  §n：下划线
 #  §o：斜体
 #  §r：重置所有格式
+
+
+commands:
+    stools:
+        description: 'CoreGame plugin command'
+        usage: '/coregame <subcommand>'
+        permission: coregame.command.stools
+        permission-message: 'You do not have permission to use this command.'
+
+
+permissions:
+  coregame.command.stools:
+    description: 'Allows the player to use the stools command.'
+    default: op
