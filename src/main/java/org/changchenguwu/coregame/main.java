@@ -13,6 +13,7 @@ public final class main extends JavaPlugin {
     @Override
     public void onEnable() {
         saveConfig();
+        saveResource("display.yml", false);
         Objects.requireNonNull(Bukkit.getPluginCommand("stools")).setExecutor(new ScreenTest());
         Bukkit.getPluginManager().registerEvents(new AdminScreenListener(),this);
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");

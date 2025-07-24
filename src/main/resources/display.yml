@@ -1,3 +1,10 @@
-monitor:
-
-info:
+Screen:
+    0:
+        type: Monitor
+        location:
+            world: flat
+            x: -1364
+            y: -50
+            z: 312
+        description: "欢迎信息显示器"
+        text: "§a欢迎来到CoreGame插件！\n§b请使用 /coregame <subcommand> 来查看可用命令。\n§c祝您游戏愉快！"

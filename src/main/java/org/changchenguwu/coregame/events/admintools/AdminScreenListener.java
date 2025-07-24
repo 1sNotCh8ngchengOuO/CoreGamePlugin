@@ -1,8 +1,6 @@
 package org.changchenguwu.coregame.events.admintools;
 
-import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.entity.Display;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TextDisplay;
@@ -14,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.changchenguwu.coregame.display.ScreenManager;
 import org.changchenguwu.coregame.tools.ScreenTools;
 
 import java.util.List;
@@ -50,14 +49,7 @@ public class AdminScreenListener implements Listener {
         }
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(ScreenTools.NEW_SCREEN_KEY, PersistentDataType.BYTE)) {
-                Location loc = event.getClickedBlock().getLocation();
-                if (loc.getWorld() == null){return;}
-                loc.getWorld().spawn(loc, TextDisplay.class, entity -> {
-                    entity.setTextOpacity((byte)0);
-                    entity.setText("Hello, World!");
-                    entity.setBillboard(Display.Billboard.FIXED);
-                    entity.setShadowed(false);
-                });
+                ScreenManager.loadScreens();
             }
         } else if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
             if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(ScreenTools.NEW_SCREEN_KEY, PersistentDataType.BYTE)){
