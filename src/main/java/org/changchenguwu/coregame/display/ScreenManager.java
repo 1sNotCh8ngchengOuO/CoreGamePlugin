@@ -16,11 +16,12 @@ import java.util.Set;
 
 public class ScreenManager {
 
-    public static List<Screen> screens = new ArrayList<>();
+    public static List<Screen> allScreens = new ArrayList<>();
     public static YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "display.yml"));
     public static ConfigurationSection screensSection = config.getConfigurationSection("Screen");
 
     public static void loadScreens() {
+        List<Screen> screensTemp = new ArrayList<>();
         Set<String> keys = screensSection.getKeys(false);
         for (String key : keys) {
             ConfigurationSection configurationSection = screensSection.getConfigurationSection(key);
@@ -38,11 +39,15 @@ public class ScreenManager {
                 Location location = new Location(world, x, y, z);
                 String description = configurationSection.getString("description", "No description provided");
                 String text = configurationSection.getString("text", "No text provided");
-                screens.add(new Monitor(id, location, description, text));
+                screensTemp.add(new Monitor(id, location, description, text));
             }
         }
-        for (Screen screen : screens) {
+        for (Screen screen : screensTemp) {
             screen.spawn();
         }
+        allScreens.addAll(screensTemp);
+        screensTemp.clear();
     }
+
+    //clear时记得把allScreens的相同内容清空、删除AdminScreenListener的clear
 }

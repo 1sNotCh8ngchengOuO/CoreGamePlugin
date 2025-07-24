@@ -43,15 +43,16 @@ public class AdminScreenListener implements Listener {
     @EventHandler
     public void onNewScreenClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (event.getHand() != EquipmentSlot.HAND) {return;}
         if (player.getInventory().getItemInMainHand().getItemMeta() == null) {
             return;
         }
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+            if (event.getHand() != EquipmentSlot.HAND) {return;}
             if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(ScreenTools.NEW_SCREEN_KEY, PersistentDataType.BYTE)) {
+                event.setCancelled(true);
                 ScreenManager.loadScreens();
             }
-        } else if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+        } else if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
             if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(ScreenTools.NEW_SCREEN_KEY, PersistentDataType.BYTE)){
                 event.setCancelled(true);
                 List<Entity> nearbyEntities = player.getNearbyEntities(0.5, 0.5, 0.5);
