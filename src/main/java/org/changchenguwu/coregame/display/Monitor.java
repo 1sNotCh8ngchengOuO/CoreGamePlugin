@@ -52,12 +52,13 @@ public class Monitor implements Screen{
     }
 
     @Override
-    public void spawn() {
+    public TextDisplay spawn() {
         this.textDisplay = Objects.requireNonNull(location.getWorld()).spawn(location, TextDisplay.class, entity -> {
             entity.setText(text);
             entity.setBillboard(Display.Billboard.FIXED);
             entity.setShadowed(false);
         });
+        return textDisplay;
     }
 
     @Override
@@ -68,5 +69,10 @@ public class Monitor implements Screen{
     @Override
     public void remove() {
         textDisplay.remove();
+    }
+
+    @Override
+    public TextDisplay getTextDisplay() {
+        return textDisplay;
     }
 }

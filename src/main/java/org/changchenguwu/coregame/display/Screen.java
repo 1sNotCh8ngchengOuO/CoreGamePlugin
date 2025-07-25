@@ -1,6 +1,7 @@
 package org.changchenguwu.coregame.display;
 
 import org.bukkit.Location;
+import org.bukkit.entity.TextDisplay;
 
 public interface Screen {
     String getType();
@@ -9,7 +10,8 @@ public interface Screen {
     String getText();
     Location getLocation();
     void setText(String text);
-    void spawn();
+    TextDisplay spawn();
     void update();
     void remove();
+    TextDisplay getTextDisplay();
 }
