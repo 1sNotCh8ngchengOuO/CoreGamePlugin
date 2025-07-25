@@ -21,6 +21,13 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <outputDirectory>I:\MinecraftServer\plugins</outputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
@@ -51,6 +58,10 @@
   </build>
 
   <repositories>
+    <repository>
+      <id>dmulloy2-repo</id>
+      <url>https://repo.dmulloy2.net/repository/public/</url>
+    </repository>
       <repository>
         <id>spigotmc-repo</id>
         <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
@@ -63,10 +74,23 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>26.0.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.rapha149.signgui</groupId>
+      <artifactId>signgui</artifactId>
+      <version>2.5.3</version>
+    </dependency>
+    <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
       <version>1.20.1-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+
 </project>

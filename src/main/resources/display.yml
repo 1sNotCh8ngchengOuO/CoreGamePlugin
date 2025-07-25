@@ -1,4 +1,5 @@
 #顺时针+90
+#一格4行、7列
 Screen:
     0:
         type: Monitor

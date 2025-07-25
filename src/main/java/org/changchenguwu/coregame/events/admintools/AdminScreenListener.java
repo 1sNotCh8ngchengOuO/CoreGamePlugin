@@ -1,14 +1,18 @@
 package org.changchenguwu.coregame.events.admintools;
 
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Sign;
+import de.rapha149.signgui.SignGUI;
+import de.rapha149.signgui.exception.SignGUIVersionException;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.server.PluginEnableEvent;
@@ -18,10 +22,39 @@ import org.bukkit.persistence.PersistentDataType;
 import org.changchenguwu.coregame.display.ScreenManager;
 import org.changchenguwu.coregame.tools.ScreenTools;
 
+import java.util.Objects;
+
 
 public class AdminScreenListener implements Listener {
 
     public static int id;
+
+    @EventHandler
+    public void onBlockInfoCheckClick(PlayerInteractEvent event) {
+        if (event.getHand() != EquipmentSlot.HAND) {
+            return;
+        }
+        Player player = event.getPlayer();
+        Block block = event.getClickedBlock();
+        if (block == null) {
+            return;
+        }
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+            if (player.getInventory().getItemInMainHand().getItemMeta() == null) {
+                return;
+            }
+            if (!player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(ScreenTools.GET_BLOCK_INFO, PersistentDataType.BYTE)) {
+                return;
+            }
+            event.setCancelled(true);
+            Location location = block.getLocation().clone();
+            String locationM = Objects.requireNonNull(location.getWorld()).getName() +","+ location.getX() +","+ location.getY()+","+location.getZ();
+            BaseComponent message = new TextComponent("§a方块信息:\n"+locationM);
+            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new Text(locationM)));
+            message.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, locationM));
+            player.spigot().sendMessage(message);
+        }
+    }
 
     @EventHandler
     public void onPluginEnable(PluginEnableEvent event) {
@@ -95,33 +128,27 @@ public class AdminScreenListener implements Listener {
             player.openInventory(ScreenTools.toolsSettingChest());
         }
         if (event.getRawSlot() == 0) {
-            BlockState blockState = player.getWorld().getBlockAt(-1388, -56, 333).getState();
-            Sign sign = (Sign) blockState;
-            player.openSign(sign);
+            try {
+                SignGUI sign = SignGUI.builder().setColor(DyeColor.BLACK).setType(Material.BAMBOO_SIGN).setHandler((p,result) -> {
+                    String line = result.getLine(0).replaceAll("[^0-9]", "");
+                    if(line.isEmpty()) {
+                        p.sendMessage("§c荧幕序列号不能为空");
+                        return null;
+                    }
+                    AdminScreenListener.id = Integer.parseInt(line);
+                    p.sendMessage("§a设置荧幕序列号为: §f" + AdminScreenListener.id);
+                    p.playSound(p.getLocation(),Sound.BLOCK_ANVIL_USE,1,1);
+                    return null;
+                }).build();
+                sign.open(player);
+            } catch (SignGUIVersionException e) {
+                player.sendMessage(ChatColor.RED+"出错了！"+ e);
+            }
         }
         if (event.getRawSlot() == 7) {
             player.performCommand("loadallscreen");
             player.sendMessage("§a荧幕已重载");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
-        }
-    }
-
-    @EventHandler
-    public void onSignEvent(SignChangeEvent event) {
-        try {
-            if (event.getBlock().getLocation().equals(new Location(event.getBlock().getWorld(), -1388, -56, 333))) {
-                event.setCancelled(true);
-                String line = event.getLine(0);
-                if(line == null || line.isEmpty()) {
-                    event.getPlayer().sendMessage("§c荧幕序列号不能为空");
-                    return;
-                }
-                AdminScreenListener.id = Integer.parseInt(line);
-                event.getPlayer().sendMessage("§a设置荧幕序列号为: §f" + AdminScreenListener.id);
-                event.getPlayer().playSound(event.getPlayer().getLocation(),Sound.BLOCK_ANVIL_USE,1,1);
-            }
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new RuntimeException(e);
         }
     }
 }

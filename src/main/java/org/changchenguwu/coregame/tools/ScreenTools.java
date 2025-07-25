@@ -19,6 +19,8 @@ public class ScreenTools {
 
     public static Inventory createScreenToolsChest(){
         Inventory inventory = Bukkit.createInventory(null, 9, "STC");
+
+        inventory.setItem(1,generateGetBlockInfo());
         inventory.setItem(0, generateScreenTools());
         return inventory;
     }
@@ -30,6 +32,19 @@ public class ScreenTools {
         if (meta != null) {
             meta.getPersistentDataContainer().set(NEW_SCREEN_KEY, PersistentDataType.BYTE, (byte) 1);
             meta.setDisplayName("§f§l生成荧幕");
+            meta.addEnchant(Enchantment.LUCK,1, true);
+            itemStack.setItemMeta(meta);
+        }
+        return itemStack;
+    }
+
+    public static final NamespacedKey GET_BLOCK_INFO = new NamespacedKey(JavaPlugin.getPlugin(main.class),"get_block_info");
+    public static ItemStack generateGetBlockInfo() {
+        ItemStack itemStack = new ItemStack(Material.BLAZE_ROD, 1);
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta != null) {
+            meta.getPersistentDataContainer().set(GET_BLOCK_INFO, PersistentDataType.BYTE, (byte) 1);
+            meta.setDisplayName("§f§l获取方块信息");
             meta.addEnchant(Enchantment.LUCK,1, true);
             itemStack.setItemMeta(meta);
         }
