@@ -1,6 +1,8 @@
 Screen:
     0:
         type: Monitor
+        pitch: 0
+        yaw: 0
         location:
             world: flat
             x: -1364

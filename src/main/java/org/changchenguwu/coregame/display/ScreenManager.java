@@ -22,7 +22,9 @@ public class ScreenManager {
     public static void loadScreens() {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "display.yml"));
         ConfigurationSection screensSection = config.getConfigurationSection("Screen");
-        assert screensSection != null;
+        if (screensSection == null) {
+            return;
+        }
         Set<String> keys = screensSection.getKeys(false);
         for (String key : keys) {
             ConfigurationSection configurationSection = screensSection.getConfigurationSection(key);
@@ -40,7 +42,9 @@ public class ScreenManager {
                 Location location = new Location(world, x, y, z);
                 String description = configurationSection.getString("description", "No description provided");
                 String text = configurationSection.getString("text", "No text provided");
-                Monitor monitor = new Monitor(id, location, description, text);
+                int pitch = configurationSection.getInt("pitch", 0);
+                int yaw = configurationSection.getInt("yaw", 0);
+                Monitor monitor = new Monitor(id, location, description, text, pitch, yaw);
                 allScreens.put(id,monitor);
             }//else if (info...)
         }

@@ -13,12 +13,16 @@ public class Monitor implements Screen{
     private final Location location;
     private final String description;
     private String text;
+    private final int pitch;
+    private final int yaw;
 
-    public Monitor(int id, Location location, String description, String text) {
+    public Monitor(int id, Location location, String description, String text,int pitch, int yaw) {
         this.id = id;
         this.location = location;
         this.description = description;
         this.text = text;
+        this.pitch = pitch;
+        this.yaw = yaw;
     }
 
     @Override
@@ -57,6 +61,7 @@ public class Monitor implements Screen{
             entity.setText(text);
             entity.setBillboard(Display.Billboard.FIXED);
             entity.setShadowed(false);
+            entity.setRotation(pitch,yaw);
         });
         return textDisplay;
     }

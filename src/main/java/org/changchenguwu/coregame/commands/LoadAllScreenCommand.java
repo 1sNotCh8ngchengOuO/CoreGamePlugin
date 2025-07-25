@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LoadAllScreenCommand implements TabExecutor {
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!sender.isOp()) {
@@ -20,14 +21,19 @@ public class LoadAllScreenCommand implements TabExecutor {
         }
         ScreenManager.loadScreens();
         sender.sendMessage("所有屏幕已加载");
+        StringBuilder screenList = getLoadId();
+        sender.sendMessage(screenList.toString());
+        return true;
+    }
+
+    public static @NotNull StringBuilder getLoadId() {
         Map<Integer, Screen> allScreens = ScreenManager.allScreens;
         StringBuilder screenList = new StringBuilder("已加载的屏幕ID: ");
         for(Integer key: allScreens.keySet()){
             String string = key.toString();
             screenList.append("[").append(string).append("] ");
         }
-        sender.sendMessage(screenList.toString());
-        return true;
+        return screenList;
     }
 
     @Override
