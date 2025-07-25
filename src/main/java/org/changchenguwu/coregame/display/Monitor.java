@@ -61,7 +61,7 @@ public class Monitor implements Screen{
             entity.setText(text);
             entity.setBillboard(Display.Billboard.FIXED);
             entity.setShadowed(false);
-            entity.setRotation(pitch,yaw);
+            entity.setRotation(yaw,pitch);
         });
         return textDisplay;
     }

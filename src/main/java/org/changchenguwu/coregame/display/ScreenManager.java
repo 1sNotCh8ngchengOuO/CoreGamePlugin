@@ -36,9 +36,9 @@ public class ScreenManager {
             String type = configurationSection.getString("type");
             if ("Monitor".equals(type)){
                 World world = Bukkit.getWorld(Objects.requireNonNull(configurationSection.getString("location.world")));
-                int x = configurationSection.getInt("location.x");
-                int y = configurationSection.getInt("location.y");
-                int z = configurationSection.getInt("location.z");
+                double x = configurationSection.getDouble("location.x");
+                double y = configurationSection.getDouble("location.y");
+                double z = configurationSection.getDouble("location.z");
                 Location location = new Location(world, x, y, z);
                 String description = configurationSection.getString("description", "No description provided");
                 String text = configurationSection.getString("text", "No text provided");
