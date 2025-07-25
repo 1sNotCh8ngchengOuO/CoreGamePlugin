@@ -9,7 +9,7 @@ import org.changchenguwu.coregame.tools.ScreenTools;
 
 import java.util.List;
 
-public class ScreenTest implements TabExecutor {
+public class GetScreenToolsCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player) {
