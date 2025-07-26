@@ -19,7 +19,7 @@ public class Monitor implements Screen{
     private final int id;
     private final Location location;
     private final String description;
-    private String text;
+    private final String text;
     private final int pitch;
     private final int yaw;
     private final String billboard;
@@ -29,7 +29,12 @@ public class Monitor implements Screen{
     }
 
     private String strategy;
-    private final int interval;
+
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
+    private int interval;
 
     private int i = 0;
     private int index = 0;
@@ -83,11 +88,6 @@ public class Monitor implements Screen{
     }
 
     @Override
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    @Override
     public TextDisplay spawn() {
         this.textDisplay = Objects.requireNonNull(location.getWorld()).spawn(location, TextDisplay.class, entity -> {
             entity.setText(text);
@@ -130,7 +130,7 @@ public class Monitor implements Screen{
         if(textList != null){
             this.textList = textList;
         }else{
-            textDisplay.setText(text);
+            textDisplay.setText(formatText(text));
         }
     }
 
