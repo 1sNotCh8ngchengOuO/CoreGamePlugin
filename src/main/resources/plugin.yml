@@ -30,6 +30,11 @@ depend: [ProtocolLib]
 
 
 commands:
+  us:
+    description: 'Update the screen'
+    usage: '/coregame <subcommand>'
+    permission: coregame.command.stools
+    permission-message: 'You do not have permission to use this command.'
   loadallscreen:
     description: 'Load all screens from the display.yml file'
     usage: '/loadallscreen'
@@ -43,6 +48,9 @@ commands:
 
 
 permissions:
+  coregame.command.us:
+        description: 'Allows the player to use the us command.'
+        default: op
   coregame.command.loadallscreen:
     description: 'Allows the player to use the loadallscreen command.'
     default: op

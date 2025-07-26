@@ -1,8 +1,10 @@
 #顺时针+90
 #一格4行、7列
+#CENTER HORIZONTAL VERTICAL FIXED
 Screen:
     0:
         type: Monitor
+        billboard: FIXED
         pitch: 0
         yaw: 0
         location:

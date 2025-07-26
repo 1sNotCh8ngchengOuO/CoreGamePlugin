@@ -15,14 +15,16 @@ public class Monitor implements Screen{
     private String text;
     private final int pitch;
     private final int yaw;
+    private String billboard;
 
-    public Monitor(int id, Location location, String description, String text,int pitch, int yaw) {
+    public Monitor(int id, Location location, String description, String text,int pitch, int yaw, String billboard) {
         this.id = id;
         this.location = location;
         this.description = description;
         this.text = text;
         this.pitch = pitch;
         this.yaw = yaw;
+        this.billboard = billboard;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class Monitor implements Screen{
     public TextDisplay spawn() {
         this.textDisplay = Objects.requireNonNull(location.getWorld()).spawn(location, TextDisplay.class, entity -> {
             entity.setText(text);
-            entity.setBillboard(Display.Billboard.FIXED);
+            entity.setBillboard(Display.Billboard.valueOf(billboard));
             entity.setShadowed(false);
             entity.setRotation(yaw,pitch);
             entity.setLineWidth(1000000000);
@@ -68,7 +70,7 @@ public class Monitor implements Screen{
     }
 
     @Override
-    public void update() {
+    public void update(String text) {
         textDisplay.setText(text);
     }
 

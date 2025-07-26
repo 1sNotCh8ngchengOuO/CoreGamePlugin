@@ -11,7 +11,7 @@ public interface Screen {
     Location getLocation();
     void setText(String text);
     TextDisplay spawn();
-    void update();
+    void update(String text);
     void remove();
     TextDisplay getTextDisplay();
 }

@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.commands.GetScreenToolsCommand;
 import org.changchenguwu.coregame.commands.LoadAllScreenCommand;
+import org.changchenguwu.coregame.commands.UpdateDisplayTestCommand;
 import org.changchenguwu.coregame.events.admintools.AdminScreenListener;
 
 import java.util.Objects;
@@ -19,6 +20,7 @@ public final class main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AdminScreenListener(),this);
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
         Objects.requireNonNull(Bukkit.getPluginCommand("loadallscreen")).setExecutor(new LoadAllScreenCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("us")).setExecutor(new UpdateDisplayTestCommand());
     }
 
     @Override

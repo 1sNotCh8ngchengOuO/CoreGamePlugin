@@ -3,6 +3,7 @@ package org.changchenguwu.coregame.display;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
@@ -44,7 +45,8 @@ public class ScreenManager {
                 String text = configurationSection.getString("text", "No text provided");
                 int pitch = configurationSection.getInt("pitch", 0);
                 int yaw = configurationSection.getInt("yaw", 0);
-                Monitor monitor = new Monitor(id, location, description, text, pitch, yaw);
+                String billboard = configurationSection.getString("billboard", "FIXED");
+                Monitor monitor = new Monitor(id, location, description, text, pitch, yaw,billboard);
                 allScreens.put(id,monitor);
             }//else if (info...)
         }
@@ -77,4 +79,12 @@ public class ScreenManager {
         uuid.put(spawn.getUniqueId(),id);
     }
 
+    public static void updateScreen(int id, CommandSender sender,String text) {
+        if (!allScreens.containsKey(id)) {
+            sender.sendMessage("尝试更新不存在的荧幕: " + id);
+            return;
+        }
+        allScreens.get(id).update(text);
+        sender.sendMessage("荧幕 " + id + " 已更新为: " + text);
+    }
 }
