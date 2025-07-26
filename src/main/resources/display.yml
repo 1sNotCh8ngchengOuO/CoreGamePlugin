@@ -2,6 +2,21 @@
 #一格4行、7列
 #CENTER HORIZONTAL VERTICAL FIXED
 Screen:
+    1:
+        type: Monitor
+        billboard: FIXED
+        pitch: 0
+        yaw: 0
+        location:
+            world: flat
+            x: -1379.0
+            y: -60.0
+            z: 308.0
+        description: "多态文本测试"
+        text: "原生的文本显示"
+        switchStrategy: SPECIAL
+        switchInterval: 20
+        special: 0,1
     0:
         type: Monitor
         billboard: FIXED
@@ -13,4 +28,14 @@ Screen:
             y: -50
             z: 312
         description: "欢迎信息显示器"
-        text: "§a欢迎来到CoreGame插件！\n§b请使用 /coregame <subcommand> 来查看可用命令。\n§c祝您游戏愉快！"
+        # 单行 text 字段保留兼容
+        text: "§a欢迎来到CoreGame插件！"
+        # 新增一个列表，里面可以写多行／多段
+        textList:
+            - "§a欢迎来到CoreGame插件！"
+            - "§b请使用 /coregame <subcommand> 来查看可用命令。"
+            - "§c祝您游戏愉快！"
+        # 策略：可以是 "ROUND_ROBIN"
+        switchStrategy: ROUND_ROBIN
+        switchInterval: 100
+        special: 0,1

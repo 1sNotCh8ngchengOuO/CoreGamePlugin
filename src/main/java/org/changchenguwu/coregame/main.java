@@ -16,6 +16,7 @@ public final class main extends JavaPlugin {
     public void onEnable() {
         saveConfig();
         saveResource("display.yml", false);
+        saveResource("displayText.yml", false);
         Objects.requireNonNull(Bukkit.getPluginCommand("stools")).setExecutor(new GetScreenToolsCommand());
         Bukkit.getPluginManager().registerEvents(new AdminScreenListener(),this);
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
@@ -25,6 +26,7 @@ public final class main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Bukkit.getScheduler().cancelTasks(this);
         Bukkit.getLogger().info(ChatColor.RED+"CoreGame插件已关闭");
     }
 }

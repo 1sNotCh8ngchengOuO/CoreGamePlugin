@@ -19,6 +19,7 @@ public class ScreenManager {
 
     public static Map<Integer,Screen> allScreens = new HashMap<>();
     public static Map<UUID,Integer> uuid = new HashMap<>();
+    public static Map<Integer,String> specialText = new HashMap<>();
 
     public static void loadScreens() {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "display.yml"));
@@ -42,13 +43,43 @@ public class ScreenManager {
                 double z = configurationSection.getDouble("location.z");
                 Location location = new Location(world, x, y, z);
                 String description = configurationSection.getString("description", "No description provided");
+
                 String text = configurationSection.getString("text", "No text provided");
+                List<String> textList = configurationSection.getStringList("textList");
+                if (textList.isEmpty()) {
+                    textList = Collections.singletonList(text);
+                }
+
+                String specialIndex = configurationSection.getString("special");
+                assert specialIndex != null;
+                String[] parts = specialIndex.split(",");
+                int[] index = new int[parts.length];
+                for (int i = 0; i < parts.length; i++) {
+                    index[i] = Integer.parseInt(parts[i].trim());
+                }
+
+                String strategy = configurationSection.getString("switchStrategy", "ROUND_ROBIN");
+                int interval = configurationSection.getInt("switchInterval", 100);
                 int pitch = configurationSection.getInt("pitch", 0);
                 int yaw = configurationSection.getInt("yaw", 0);
                 String billboard = configurationSection.getString("billboard", "FIXED");
-                Monitor monitor = new Monitor(id, location, description, text, pitch, yaw,billboard);
+                Monitor monitor = new Monitor(id, location, description, text, pitch, yaw,billboard, strategy, interval,textList,index);
                 allScreens.put(id,monitor);
             }//else if (info...)
+        }
+    }
+
+    public static void loadSpecialText() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "displayText.yml"));
+        Set<String> keys = config.getKeys(false);
+        for (String key : keys) {
+            ConfigurationSection section = config.getConfigurationSection(key);
+            if (section == null) {
+                continue;
+            }
+            int id = Integer.parseInt(key);
+            String text = section.getString("text", "");
+            specialText.put(id, text);
         }
     }
 
@@ -79,12 +110,12 @@ public class ScreenManager {
         uuid.put(spawn.getUniqueId(),id);
     }
 
-    public static void updateScreen(int id, CommandSender sender,String text) {
+    public static void updateScreen(int id, CommandSender sender,String text,List<String> textList) {
         if (!allScreens.containsKey(id)) {
             sender.sendMessage("尝试更新不存在的荧幕: " + id);
             return;
         }
-        allScreens.get(id).update(text);
-        sender.sendMessage("荧幕 " + id + " 已更新为: " + text);
+        allScreens.get(id).update(text,textList);
+        sender.sendMessage("荧幕 " + id + " 已更新" );
     }
 }

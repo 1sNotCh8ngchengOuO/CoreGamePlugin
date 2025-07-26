@@ -59,6 +59,7 @@ public class AdminScreenListener implements Listener {
     @EventHandler
     public void onPluginEnable(PluginEnableEvent event) {
         ScreenManager.loadScreens();
+        ScreenManager.loadSpecialText();
     }
 
     @EventHandler

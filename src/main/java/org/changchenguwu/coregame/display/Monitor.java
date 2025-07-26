@@ -3,7 +3,14 @@ package org.changchenguwu.coregame.display;
 import org.bukkit.Location;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.TextDisplay;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+import org.changchenguwu.coregame.main;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Monitor implements Screen{
@@ -15,16 +22,39 @@ public class Monitor implements Screen{
     private String text;
     private final int pitch;
     private final int yaw;
-    private String billboard;
+    private final String billboard;
 
-    public Monitor(int id, Location location, String description, String text,int pitch, int yaw, String billboard) {
+    public void setStrategy(String strategy) {
+        this.strategy = strategy;
+    }
+
+    private String strategy;
+    private final int interval;
+
+    private int i = 0;
+    private int index = 0;
+
+    BukkitTask task;
+    List<String> textList;
+
+    public void setSpecialTextIndex(int[] specialTextIndex) {
+        this.specialTextIndex = specialTextIndex;
+    }
+
+    private int[] specialTextIndex;
+
+    public Monitor(int id, Location location, String description, String text, int pitch, int yaw, String billboard, String strategy, int interval, List<String> textList,int[] specialTextIndex) {
         this.id = id;
         this.location = location;
         this.description = description;
-        this.text = text;
+        this.text = formatText(text);
         this.pitch = pitch;
         this.yaw = yaw;
         this.billboard = billboard;
+        this.strategy = strategy;
+        this.interval = interval;
+        this.textList = textList;
+        this.specialTextIndex = specialTextIndex;
     }
 
     @Override
@@ -66,12 +96,42 @@ public class Monitor implements Screen{
             entity.setRotation(yaw,pitch);
             entity.setLineWidth(1000000000);
         });
+        task = new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (textDisplay == null || textDisplay.isDead()) {
+                    this.cancel();
+                    return;
+                }
+                String next;
+                switch (strategy.toUpperCase()) {
+                    case "SPECIAL":
+                        next = ScreenManager.specialText.get(i);
+                        textDisplay.setText(formatText(next));
+                        i = (i+1) % specialTextIndex.length;
+                        break;
+                    case "SINGLE":
+                        next = text;
+                        textDisplay.setText(formatText(next));
+                        break;
+                    case "ROUND_ROBIN":
+                        index = (index + 1) % textList.size();
+                        next = textList.get(index);
+                        textDisplay.setText(formatText(next));
+                        break;
+                }
+            }
+        }.runTaskTimer(JavaPlugin.getPlugin(main.class), interval, interval);
         return textDisplay;
     }
 
     @Override
-    public void update(String text) {
-        textDisplay.setText(text);
+    public void update(String text,List<String> textList) {
+        if(textList != null){
+            this.textList = textList;
+        }else{
+            textDisplay.setText(text);
+        }
     }
 
     @Override
@@ -82,5 +142,11 @@ public class Monitor implements Screen{
     @Override
     public TextDisplay getTextDisplay() {
         return textDisplay;
+    }
+
+    public String formatText(String text) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        return text.replace("<data>",formatter.format(date));
     }
 }
