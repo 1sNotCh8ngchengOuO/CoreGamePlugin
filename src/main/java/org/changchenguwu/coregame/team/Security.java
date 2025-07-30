@@ -8,23 +8,35 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.Objects;
 
-public class Security implements ITeam{
-    Scoreboard manager = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
-    Team team;
-    @Override
-    public void registerTeam() {
-        team = manager.registerNewTeam("security");
-        team.setAllowFriendlyFire(false);
-        team.setPrefix(ChatColor.DARK_GRAY + "[安全]");
+public class Security{
+    static Team team;
+
+    public static void uninit() {
+        if (team != null) {
+            team.unregister();
+            team = null;
+        }
     }
 
-    @Override
-    public void joinTeam(Player player) {
+    public static void init() {
+        Scoreboard mainScoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
+        team = mainScoreboard.getTeam("security");
+        if (team == null) {
+            team = mainScoreboard.registerNewTeam("security");
+            team.setPrefix(ChatColor.DARK_GRAY + "[安保]");
+            team.setColor(ChatColor.DARK_GRAY);
+            team.setAllowFriendlyFire(false);
+        }
+    }
+
+    public static void joinSecurityTeam(Player player) {
+        Scoreboard scoreboard = player.getScoreboard();
+
+        Team currentTeam = scoreboard.getEntryTeam(player.getName());
+        if (currentTeam != null) {
+            currentTeam.removeEntry(player.getName());
+        }
+
         team.addEntry(player.getName());
-    }
-
-    @Override
-    public void quitTeam(Player player) {
-        team.removeEntry(player.getName());
     }
 }

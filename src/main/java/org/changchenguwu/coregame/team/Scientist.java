@@ -8,24 +8,35 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.Objects;
 
-public class Scientist implements ITeam {
-    Scoreboard manager = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
-    Team team;
+public class Scientist{
+    static Team team;
 
-    @Override
-    public void registerTeam(){
-        team = manager.registerNewTeam("scientist");
-        team.setAllowFriendlyFire(false);
-        team.setPrefix(ChatColor.AQUA + "[科学家]");
+    public static void uninit() {
+        if (team != null) {
+            team.unregister(); // 注销队伍
+            team = null;
+        }
     }
 
-    @Override
-    public void joinTeam(Player player){
+    public static void init() {
+        Scoreboard mainScoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
+        team = mainScoreboard.getTeam("scientist");
+        if (team == null) {
+            team = mainScoreboard.registerNewTeam("scientist");
+            team.setPrefix(ChatColor.DARK_AQUA + "[科学家]");
+            team.setColor(ChatColor.DARK_AQUA);
+            team.setAllowFriendlyFire(false);
+        }
+    }
+
+    public static void joinScientistTeam(Player player) {
+        Scoreboard scoreboard = player.getScoreboard();
+
+        Team currentTeam = scoreboard.getEntryTeam(player.getName());
+        if (currentTeam != null) {
+            currentTeam.removeEntry(player.getName());
+        }
+
         team.addEntry(player.getName());
-    }
-
-    @Override
-    public void quitTeam(Player player){
-        team.removeEntry(player.getName());
     }
 }

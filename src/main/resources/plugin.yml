@@ -30,6 +30,11 @@ depend: [ProtocolLib]
 
 
 commands:
+  changeteam:
+    description: 'Change your team'
+    usage: '/changeteam <team>'
+    permission: coregame.command.changeteam
+    permission-message: 'You do not have permission to use this command.'
   us:
     description: 'Update the screen'
     usage: '/coregame <subcommand>'
@@ -48,6 +53,9 @@ commands:
 
 
 permissions:
+  coregame.command.changeteam:
+    description: 'Allows the player to use the changeteam command.'
+    default: op
   coregame.command.us:
         description: 'Allows the player to use the us command.'
         default: op
