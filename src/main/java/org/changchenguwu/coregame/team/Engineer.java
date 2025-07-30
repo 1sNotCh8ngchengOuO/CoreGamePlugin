@@ -6,11 +6,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import java.util.Objects;
+
 public class Engineer {
     static Team team;
 
     public static void init() {
-        Scoreboard mainScoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        Scoreboard mainScoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
         team = mainScoreboard.getTeam("engineer");
         if (team == null) {
             team = mainScoreboard.registerNewTeam("engineer");

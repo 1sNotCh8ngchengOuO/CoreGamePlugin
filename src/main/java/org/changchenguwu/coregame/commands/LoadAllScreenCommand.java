@@ -20,6 +20,7 @@ public class LoadAllScreenCommand implements TabExecutor {
             return true;
         }
         ScreenManager.loadScreens();
+        ScreenManager.loadSpecialText();
         sender.sendMessage("所有屏幕已加载");
         StringBuilder screenList = getLoadId();
         sender.sendMessage(screenList.toString());
