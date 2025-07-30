@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import org.changchenguwu.coregame.team.Engineer;
 import org.changchenguwu.coregame.team.Scientist;
 import org.changchenguwu.coregame.team.Security;
 
@@ -20,9 +21,11 @@ public class ChangeTeamCommand implements TabExecutor {
             if (args.length == 1) {
                 if ("scientist".equals(args[0])) {
                     Scientist.joinScientistTeam(player);
-                }else if ("security".equals(args[0])) {
+                } else if ("security".equals(args[0])) {
                     Security.joinSecurityTeam(player);
-                }else {
+                } else if ("engineer".equals(args[0])) {
+                    Engineer.joinEngineerTeam(player);
+                } else {
                     sender.sendMessage("未知的团队名称");
                 }
             }
@@ -34,6 +37,6 @@ public class ChangeTeamCommand implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return List.of("scientist", "security");
+        return List.of("scientist", "security", "engineer");
     }
 }

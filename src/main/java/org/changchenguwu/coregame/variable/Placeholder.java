@@ -1,7 +1,10 @@
 package org.changchenguwu.coregame.variable;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,8 +32,25 @@ public class Placeholder extends PlaceholderExpansion {
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String params) {
         if ("group".equalsIgnoreCase(params)) {
-            return "成员组(制作中)";
+            return getGroup(player);
         }
         return null;
+    }
+
+    public String getGroup(OfflinePlayer player) {
+        Player p = Bukkit.getPlayer(player.getUniqueId());
+        if(p == null) {
+            return null;
+        }
+        Team entryTeam = p.getScoreboard().getEntryTeam(p.getName());
+        if (entryTeam != null) {
+            return switch (entryTeam.getName()) {
+                case "scientist" -> "§b科学家";
+                case "security" -> "§7安保";
+                case "engineer" -> "§6工程师";
+                default -> "";
+            };
+        }
+        return "";
     }
 }
