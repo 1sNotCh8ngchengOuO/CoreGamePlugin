@@ -30,6 +30,11 @@ depend: [ProtocolLib]
 
 
 commands:
+  startupcore:
+    description: 'Startup the core'
+    usage: '/startupcore'
+    permission: coregame.command.startupcore
+    permission-message: 'You do not have permission to use this command.'
   changeteam:
     description: 'Change your team'
     usage: '/changeteam <team>'
@@ -53,6 +58,9 @@ commands:
 
 
 permissions:
+  coregame.command.startupcore:
+    description: 'Allows the player to use the startupcore command.'
+    default: op
   coregame.command.changeteam:
     description: 'Allows the player to use the changeteam command.'
     default: op
