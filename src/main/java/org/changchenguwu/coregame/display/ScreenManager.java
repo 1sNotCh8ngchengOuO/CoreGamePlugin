@@ -115,7 +115,7 @@ public class ScreenManager {
             sender.sendMessage("尝试更新不存在的荧幕: " + id);
             return;
         }
-        allScreens.get(id).update(text,textList);
+        allScreens.get(id).updateText(text,textList);
         sender.sendMessage("荧幕 " + id + " 已更新" );
     }
 }

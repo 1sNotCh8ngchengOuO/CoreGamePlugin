@@ -8,8 +8,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.changchenguwu.coregame.main;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,7 +50,7 @@ public class Monitor implements Screen{
         this.id = id;
         this.location = location;
         this.description = description;
-        this.text = formatText(text);
+        this.text = FormatText.replaceDisplayText(text);
         this.pitch = pitch;
         this.yaw = yaw;
         this.billboard = billboard;
@@ -107,17 +105,17 @@ public class Monitor implements Screen{
                 switch (strategy.toUpperCase()) {
                     case "SPECIAL":
                         next = ScreenManager.specialText.get(i);
-                        textDisplay.setText(formatText(next));
+                        textDisplay.setText(FormatText.replaceDisplayText(next));
                         i = (i+1) % specialTextIndex.length;
                         break;
                     case "SINGLE":
                         next = text;
-                        textDisplay.setText(formatText(next));
+                        textDisplay.setText(FormatText.replaceDisplayText(next));
                         break;
                     case "ROUND_ROBIN":
                         index = (index + 1) % textList.size();
                         next = textList.get(index);
-                        textDisplay.setText(formatText(next));
+                        textDisplay.setText(FormatText.replaceDisplayText(next));
                         break;
                 }
             }
@@ -126,11 +124,11 @@ public class Monitor implements Screen{
     }
 
     @Override
-    public void update(String text,List<String> textList) {
+    public void updateText(String text, List<String> textList) {
         if(textList != null){
             this.textList = textList;
         }else{
-            textDisplay.setText(formatText(text));
+            textDisplay.setText(FormatText.replaceDisplayText(text));
         }
     }
 
@@ -142,11 +140,5 @@ public class Monitor implements Screen{
     @Override
     public TextDisplay getTextDisplay() {
         return textDisplay;
-    }
-
-    public String formatText(String text) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        return text.replace("<data>",formatter.format(date));
     }
 }

@@ -12,7 +12,7 @@ public interface Screen {
     String getText();
     Location getLocation();
     TextDisplay spawn();
-    void update(String text, List<String> textList);
+    void updateText(String text, List<String> textList);
     void remove();
     TextDisplay getTextDisplay();
 }
