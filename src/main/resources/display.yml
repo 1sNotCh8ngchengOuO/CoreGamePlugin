@@ -4,6 +4,7 @@
 #
 Screen:
     2:
+        state: true
         type: Monitor
         billboard: FIXED
         pitch: 0
@@ -19,6 +20,7 @@ Screen:
         switchInterval: 2
         special: 0
     1:
+        state: false
         type: Monitor
         billboard: FIXED
         pitch: 0
@@ -34,6 +36,7 @@ Screen:
         switchInterval: 20
         special: 0,1
     0:
+        state: false
         type: Monitor
         billboard: FIXED
         pitch: 0

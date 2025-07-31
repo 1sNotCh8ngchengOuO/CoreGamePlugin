@@ -20,6 +20,7 @@ public final class main extends JavaPlugin {
         saveConfig();
         saveResource("display.yml", false);
         saveResource("displayText.yml", false);
+        saveResource("CoreSetting.yml", false);
 
         Objects.requireNonNull(Bukkit.getPluginCommand("stools")).setExecutor(new GetScreenToolsCommand());
         Bukkit.getPluginManager().registerEvents(new AdminScreenListener(),this);

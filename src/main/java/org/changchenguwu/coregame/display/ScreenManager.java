@@ -43,7 +43,7 @@ public class ScreenManager {
                 double z = configurationSection.getDouble("location.z");
                 Location location = new Location(world, x, y, z);
                 String description = configurationSection.getString("description", "No description provided");
-
+                boolean state = configurationSection.getBoolean("state", true);
                 String text = configurationSection.getString("text", "No text provided");
                 List<String> textList = configurationSection.getStringList("textList");
                 if (textList.isEmpty()) {
@@ -63,7 +63,7 @@ public class ScreenManager {
                 int pitch = configurationSection.getInt("pitch", 0);
                 int yaw = configurationSection.getInt("yaw", 0);
                 String billboard = configurationSection.getString("billboard", "FIXED");
-                Monitor monitor = new Monitor(id, location, description, text, pitch, yaw,billboard, strategy, interval,textList,index);
+                Monitor monitor = new Monitor(id, location, description, text, pitch, yaw,billboard, strategy, interval,textList,index, state); // 添加state参数
                 allScreens.put(id,monitor);
             }//else if (info...)
         }
