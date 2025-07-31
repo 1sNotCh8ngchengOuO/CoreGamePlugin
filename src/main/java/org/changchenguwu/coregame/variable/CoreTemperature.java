@@ -18,7 +18,7 @@ public class CoreTemperature {
     }
 
     public static TemperatureStatus getTemperatureStatus() {
-        if (coreTemperature == -273) {
+        if (coreTemperature <= -273) {
             return TemperatureStatus.FREEZE;
         } else if (coreTemperature <= 0) {
             return TemperatureStatus.SUPERCOOL;
