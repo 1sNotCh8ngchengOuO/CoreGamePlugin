@@ -1,6 +1,7 @@
 package org.changchenguwu.coregame.corestate;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -14,6 +15,7 @@ public class Core {
 
     private static Location coreLocation;
     private static boolean isStartup = false;
+    private static boolean couldStart = false;
 
     public static boolean isIsStartup() {
         return isStartup;
@@ -37,5 +39,25 @@ public class Core {
 
     public static Location getCoreLocation() {
         return coreLocation;
+    }
+
+    public static boolean isCouldStart() {
+        return couldStart;
+    }
+
+    public static void setCouldStart(boolean couldStart) {
+        Core.couldStart = couldStart;
+    }
+
+    public static String getCoreStartupInfo() {
+        if (!couldStart) {
+            return ChatColor.RED + "" + ChatColor.BOLD + ChatColor.ITALIC + "DISABLE";
+        }else {
+            if (!isStartup){
+                return ChatColor.YELLOW + "" + ChatColor.BOLD + ChatColor.ITALIC + "READY";
+            }else {
+                return ChatColor.GREEN + "" + ChatColor.BOLD + ChatColor.ITALIC + "STARTED";
+            }
+        }
     }
 }

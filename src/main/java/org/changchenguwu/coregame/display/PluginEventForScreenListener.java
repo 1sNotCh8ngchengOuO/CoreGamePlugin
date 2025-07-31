@@ -1,5 +1,6 @@
 package org.changchenguwu.coregame.display;
 
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
@@ -12,7 +13,10 @@ public class PluginEventForScreenListener implements Listener {
         ScreenManager.allScreens.values().stream()
             .filter(screen -> screen instanceof Monitor)
             .filter(monitor -> ((Monitor) monitor).isState())
-            .forEach(Screen::spawn);
+            .forEach(screen -> {
+                TextDisplay spawnedDisplay = screen.spawn();
+                ScreenManager.uuid.put(spawnedDisplay.getUniqueId(), screen.getId());
+            });
     }
 
     @EventHandler

@@ -1,5 +1,6 @@
 package org.changchenguwu.coregame.display;
 
+import org.changchenguwu.coregame.corestate.Core;
 import org.changchenguwu.coregame.variable.CoreTemperature;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ public class FormatText {
 
         return text
                 .replace("<data>",formatter.format(date))
-                .replace("<coretemp>", String.valueOf(CoreTemperature.getCoreTemperature()));
+                .replace("<coretemp>", String.valueOf(CoreTemperature.getCoreTemperature()))
+                .replace("<corestartinfo>", Core.getCoreStartupInfo());
     }
 }
