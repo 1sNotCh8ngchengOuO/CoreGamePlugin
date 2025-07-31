@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.commands.*;
+import org.changchenguwu.coregame.display.PluginEventForScreenListener;
 import org.changchenguwu.coregame.events.admintools.AdminScreenListener;
 import org.changchenguwu.coregame.events.coreevent.CoreInit;
 import org.changchenguwu.coregame.events.coreevent.CoreStartupListener;
@@ -33,6 +34,7 @@ public final class main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new CoreInit(),this);
         Objects.requireNonNull(Bukkit.getPluginCommand("startupcore")).setExecutor(new CoreStartupCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("coretemp")).setExecutor(new AdjustCoreTempCommand());
+        Bukkit.getPluginManager().registerEvents(new PluginEventForScreenListener(),this);
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }
