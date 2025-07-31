@@ -8,6 +8,7 @@ import org.changchenguwu.coregame.display.PluginEventForScreenListener;
 import org.changchenguwu.coregame.events.admintools.AdminScreenListener;
 import org.changchenguwu.coregame.events.coreevent.CoreInit;
 import org.changchenguwu.coregame.events.coreevent.CoreStartupListener;
+import org.changchenguwu.coregame.events.team.SelectTeamListener;
 import org.changchenguwu.coregame.events.team.TeamRegisterListener;
 import org.changchenguwu.coregame.variable.Placeholder;
 
@@ -33,11 +34,13 @@ public final class main extends JavaPlugin {
         }
         Objects.requireNonNull(Bukkit.getPluginCommand("changeteam")).setExecutor(new ChangeTeamCommand());
         Bukkit.getPluginManager().registerEvents(new TeamRegisterListener(),this);
+        Bukkit.getPluginManager().registerEvents(new SelectTeamListener(),this);
         Bukkit.getPluginManager().registerEvents(new CoreStartupListener(),this);
         Bukkit.getPluginManager().registerEvents(new CoreInit(),this);
         Objects.requireNonNull(Bukkit.getPluginCommand("startupcore")).setExecutor(new CoreStartupCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("coretemp")).setExecutor(new AdjustCoreTempCommand());
         Bukkit.getPluginManager().registerEvents(new PluginEventForScreenListener(),this);
+        Bukkit.getPluginManager().registerEvents(new SelectTeamListener() , this);
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }

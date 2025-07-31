@@ -37,7 +37,7 @@ public class CoreStartupListener implements Listener {
             if(world == null) {
                 return;
             }
-            world.getNearbyEntities(playerLocation, 1.1, 1.1, 1.1).forEach(entity -> {
+            world.getNearbyEntities(playerLocation, 1.1, 1.1, 1).forEach(entity -> {
                 if (entity instanceof TextDisplay textDisplay) {
                     if (ScreenManager.uuid.containsKey(textDisplay.getUniqueId())) {
                         int screenId = ScreenManager.uuid.get(textDisplay.getUniqueId());
