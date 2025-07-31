@@ -9,7 +9,7 @@ public interface Screen {
     String getType();
     String getDescription();
     int getId();
-    String getText();
+    String getUnFormatText();
     Location getLocation();
     TextDisplay spawn();
     void updateText(String text, List<String> textList);

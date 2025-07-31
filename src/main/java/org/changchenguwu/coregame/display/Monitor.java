@@ -17,7 +17,7 @@ public class Monitor implements Screen{
     private final int id;
     private final Location location;
     private final String description;
-    private final String text;
+    private final String unFormatText;
     private final int pitch;
     private final int yaw;
     private final String billboard;
@@ -46,11 +46,11 @@ public class Monitor implements Screen{
 
     private int[] specialTextIndex;
 
-    public Monitor(int id, Location location, String description, String text, int pitch, int yaw, String billboard, String strategy, int interval, List<String> textList,int[] specialTextIndex) {
+    public Monitor(int id, Location location, String description, String unFormatText, int pitch, int yaw, String billboard, String strategy, int interval, List<String> textList, int[] specialTextIndex) {
         this.id = id;
         this.location = location;
         this.description = description;
-        this.text = FormatText.replaceDisplayText(text);
+        this.unFormatText = unFormatText;
         this.pitch = pitch;
         this.yaw = yaw;
         this.billboard = billboard;
@@ -76,8 +76,8 @@ public class Monitor implements Screen{
     }
 
     @Override
-    public String getText() {
-        return text;
+    public String getUnFormatText() {
+        return unFormatText;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class Monitor implements Screen{
     @Override
     public TextDisplay spawn() {
         this.textDisplay = Objects.requireNonNull(location.getWorld()).spawn(location, TextDisplay.class, entity -> {
-            entity.setText(text);
+            entity.setText(FormatText.replaceDisplayText(unFormatText));
             entity.setBillboard(Display.Billboard.valueOf(billboard));
             entity.setShadowed(false);
             entity.setRotation(yaw,pitch);
@@ -109,7 +109,7 @@ public class Monitor implements Screen{
                         i = (i+1) % specialTextIndex.length;
                         break;
                     case "SINGLE":
-                        next = text;
+                        next = unFormatText;
                         textDisplay.setText(FormatText.replaceDisplayText(next));
                         break;
                     case "ROUND_ROBIN":

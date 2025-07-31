@@ -32,6 +32,7 @@ public final class main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new CoreStartupListener(),this);
         Bukkit.getPluginManager().registerEvents(new CoreInit(),this);
         Objects.requireNonNull(Bukkit.getPluginCommand("startupcore")).setExecutor(new CoreStartupCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("coretemp")).setExecutor(new AdjustCoreTempCommand());
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }

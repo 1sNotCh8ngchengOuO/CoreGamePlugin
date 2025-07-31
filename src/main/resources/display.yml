@@ -1,7 +1,23 @@
 #顺时针+90
 #一格4行、7列
 #CENTER HORIZONTAL VERTICAL FIXED
+#
 Screen:
+    2:
+        type: Monitor
+        billboard: FIXED
+        pitch: 0
+        yaw: -90
+        location:
+            world: flat
+            x: -1381.0
+            y: -46.0
+            z: 289.0
+        description: "核心温度"
+        text: "§f§l=======================\n \n \n§8§l§o核心温度\n§r<coretemp>\n \n \n§f§l======================="
+        switchStrategy: SINGLE
+        switchInterval: 2
+        special: 0
     1:
         type: Monitor
         billboard: FIXED
@@ -34,7 +50,7 @@ Screen:
         textList:
             - "§a欢迎来到CoreGame插件！"
             - "§b请使用 /coregame <subcommand> 来查看可用命令。"
-            - "§c祝您游戏愉快！"
+            - "§c祝您游戏愉快                 ！            "
         # 策略：可以是 "ROUND_ROBIN"
         switchStrategy: ROUND_ROBIN
         switchInterval: 100

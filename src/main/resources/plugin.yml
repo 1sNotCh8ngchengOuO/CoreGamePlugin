@@ -55,6 +55,11 @@ commands:
     usage: '/coregame <subcommand>'
     permission: coregame.command.stools
     permission-message: 'You do not have permission to use this command.'
+  coretemp:
+    description: '调整核心温度'
+    usage: '/coretemp <add|reduce> <数值>'
+    permission: coregame.command.coretemp
+    permission-message: '§c需要管理员权限'
 
 
 permissions:
@@ -68,7 +73,10 @@ permissions:
         description: 'Allows the player to use the us command.'
         default: op
   coregame.command.loadallscreen:
-    description: 'Allows the player to use the loadallscreen command.'
+    description: '加载所有屏幕'
+    default: op
+  coregame.command.coretemp:
+    description: '允许调整核心温度'
     default: op
   coregame.command.stools:
     description: 'Allows the player to use the stools command.'
