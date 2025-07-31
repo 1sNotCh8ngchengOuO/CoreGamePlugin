@@ -9,6 +9,7 @@ import org.changchenguwu.coregame.events.admintools.AdminScreenListener;
 import org.changchenguwu.coregame.events.coreevent.CoreInit;
 import org.changchenguwu.coregame.events.coreevent.CoreStartupListener;
 import org.changchenguwu.coregame.events.team.TeamRegisterListener;
+import org.changchenguwu.coregame.events.interactive.TextDisplayInteractionListener;
 import org.changchenguwu.coregame.variable.Placeholder;
 
 import java.util.Objects;
@@ -17,10 +18,11 @@ public final class main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveConfig();
+        saveResource("config.yml",false);
         saveResource("display.yml", false);
         saveResource("displayText.yml", false);
         saveResource("CoreSetting.yml", false);
+        saveResource("InteractiveBlock.yml", false);
 
         Objects.requireNonNull(Bukkit.getPluginCommand("stools")).setExecutor(new GetScreenToolsCommand());
         Bukkit.getPluginManager().registerEvents(new AdminScreenListener(),this);
@@ -36,6 +38,7 @@ public final class main extends JavaPlugin {
         Objects.requireNonNull(Bukkit.getPluginCommand("startupcore")).setExecutor(new CoreStartupCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("coretemp")).setExecutor(new AdjustCoreTempCommand());
         Bukkit.getPluginManager().registerEvents(new PluginEventForScreenListener(),this);
+        Bukkit.getPluginManager().registerEvents(new TextDisplayInteractionListener(),this);
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }

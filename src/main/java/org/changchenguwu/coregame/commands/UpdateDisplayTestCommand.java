@@ -17,7 +17,7 @@ public class UpdateDisplayTestCommand implements TabExecutor {
                 return true;
             }
             int id = Integer.parseInt(args[0]);
-            String text = args[1];
+            String text = args[1].replace("\\n", "\n");
             ScreenManager.updateScreen(id,sender, text,null);
         }else {
             sender.sendMessage("§c你没有权限使用此命令");

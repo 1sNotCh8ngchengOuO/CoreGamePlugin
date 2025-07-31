@@ -1,0 +1,9 @@
+#flat,-1377.0,-46.0,287.0
+0:
+    state: true
+    description: 核心开机
+    location:
+        world: flat
+        x: -1377
+        y: -46
+        z: 287

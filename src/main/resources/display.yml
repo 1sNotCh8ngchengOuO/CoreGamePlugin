@@ -1,8 +1,23 @@
 #顺时针+90
-#一格4行、7列
 #CENTER HORIZONTAL VERTICAL FIXED
 #
 Screen:
+    3:
+        state: true
+        type: Monitor
+        billboard: FIXED
+        pitch: -90
+        yaw: -90
+        location:
+            world: flat
+            x: -1376.5
+            y: -46
+            z: 288.5
+        description: "核心启动信息"
+        text: "§f§l===============\n \n§8§l§o核心启动信息\n§r<corestartinfo>\n \n§f§l==============="
+        switchStrategy: SINGLE
+        switchInterval: 10
+        special: 0
     2:
         state: true
         type: Monitor

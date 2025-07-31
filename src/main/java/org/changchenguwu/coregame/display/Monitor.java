@@ -17,7 +17,7 @@ public class Monitor implements Screen{
     private final int id;
     private final Location location;
     private final String description;
-    private final String unFormatText;
+    private String unFormatText;
     private final int pitch;
     private final int yaw;
     private final String billboard;
@@ -135,7 +135,7 @@ public class Monitor implements Screen{
         if(textList != null){
             this.textList = textList;
         }else{
-            textDisplay.setText(FormatText.replaceDisplayText(text));
+            this.unFormatText = text;
         }
     }
 
