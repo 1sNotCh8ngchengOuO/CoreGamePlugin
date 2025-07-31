@@ -60,6 +60,11 @@ commands:
     usage: '/coretemp <add|reduce> <数值>'
     permission: coregame.command.coretemp
     permission-message: '§c需要管理员权限'
+  screenshake:
+    description: '控制玩家屏幕抖动效果.'
+    usage: '/<command> [start <强度> <持续时间(秒)>] or /<command> stop'
+    permission: coregame.command.screenshake
+    permission-message: '§c需要管理员权限'
 
 
 permissions:
@@ -77,6 +82,9 @@ permissions:
     default: op
   coregame.command.coretemp:
     description: '允许调整核心温度'
+    default: op
+  coregame.command.screenshake:
+    description: '允许控制玩家屏幕抖动效果.'
     default: op
   coregame.command.stools:
     description: 'Allows the player to use the stools command.'

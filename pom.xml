@@ -62,17 +62,21 @@
       <id>jitpack-placeholderapi</id>
       <url>https://jitpack.io</url>
     </repository>
-      <repository>
-        <id>spigotmc-repo</id>
-        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-      </repository>
+    <repository>
+      <id>spigotmc-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
     <repository>
       <id>sonatype</id>
       <url>https://oss.sonatype.org/content/groups/public/</url>
     </repository>
+    <repository>
+      <id>dmulloy2-repo</id>
+      <url>https://repo.dmulloy2.net/repository/public/</url>
+    </repository>
   </repositories>
 
-  <dependencies>
+    <dependencies>
     <dependency>
       <groupId>com.github.placeholderapi</groupId>
       <artifactId>placeholderapi</artifactId>
@@ -94,6 +98,12 @@
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
       <version>1.20.1-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.comphenix.protocol</groupId>
+      <artifactId>ProtocolLib</artifactId>
+      <version>4.8.0</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
