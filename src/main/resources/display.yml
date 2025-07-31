@@ -1,7 +1,23 @@
 #顺时针+90
 #CENTER HORIZONTAL VERTICAL FIXED
-#flat,-1376.0,-45.0,288.0
+#
 Screen:
+    4:
+        state: true
+        type: Monitor
+        billboard: FIXED
+        pitch: -90
+        yaw: 0
+        location:
+            world: flat
+            x: -1373.0
+            y: -44.99
+            z: 288.0
+        description: "核心初始化"
+        text: "\n       §b初始化       \n\n"
+        switchStrategy: SINGLE
+        switchInterval: 10
+        special: 0
     3:
         state: true
         type: Monitor

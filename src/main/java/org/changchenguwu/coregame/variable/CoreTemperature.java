@@ -1,5 +1,7 @@
 package org.changchenguwu.coregame.variable;
 
+import org.changchenguwu.coregame.corestate.TemperatureStatus;
+
 public class CoreTemperature {
     private static int coreTemperature = 30;
 
@@ -11,7 +13,23 @@ public class CoreTemperature {
         coreTemperature -= temperature;
     }
 
-    public static int getCoreTemperature() {
-        return coreTemperature;
+    public static String getCoreTemperature() {
+        return coreTemperature +"°C";
+    }
+
+    public static TemperatureStatus getTemperatureStatus() {
+        if (coreTemperature == -273) {
+            return TemperatureStatus.FREEZE;
+        } else if (coreTemperature <= 0) {
+            return TemperatureStatus.SUPERCOOL;
+        } else if (coreTemperature <= 300) {
+            return TemperatureStatus.NORMAL;
+        } else if (coreTemperature <= 6000) {
+            return TemperatureStatus.OVERHEAT;
+        } else if (coreTemperature <= 10000) {
+            return TemperatureStatus.CRITICAL;
+        } else {
+            return TemperatureStatus.MELTDOWN;
+        }
     }
 }

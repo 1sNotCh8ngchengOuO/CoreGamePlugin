@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +17,7 @@ public class Core {
     private static Location coreLocation;
     private static boolean isStartup = false;
     private static boolean couldStart = false;
+    private static Block[] coreShellBlock;
 
     public static boolean isIsStartup() {
         return isStartup;
@@ -59,5 +61,29 @@ public class Core {
                 return ChatColor.GREEN + "" + ChatColor.BOLD + ChatColor.ITALIC + "STARTED";
             }
         }
+    }
+
+    public static void initCoreShellBlock() {
+        Block[] block = new Block[14];
+        block[0] = coreLocation.getBlock().getRelative(1, 0, 0);
+        block[1] = coreLocation.getBlock().getRelative(1, 1, 0);
+        block[2] = coreLocation.getBlock().getRelative(1, -1, 0);
+
+        block[3] = coreLocation.getBlock().getRelative(-1, 0, 0);
+        block[4] = coreLocation.getBlock().getRelative(-1, 1, 0);
+        block[5] = coreLocation.getBlock().getRelative(-1, -1, 0);
+
+        block[6] = coreLocation.getBlock().getRelative(0, 0, 1);
+        block[7] = coreLocation.getBlock().getRelative(0, 1, 1);
+        block[8] = coreLocation.getBlock().getRelative(0, -1, 1);
+
+        block[9] = coreLocation.getBlock().getRelative(0, 0, -1);
+        block[10] = coreLocation.getBlock().getRelative(0, 1, -1);
+        block[11] = coreLocation.getBlock().getRelative(0, -1, -1);
+
+        block[12] = coreLocation.getBlock().getRelative(0, 2, 0);
+        block[13] = coreLocation.getBlock().getRelative(0, -2, 0);
+
+        coreShellBlock = block;
     }
 }

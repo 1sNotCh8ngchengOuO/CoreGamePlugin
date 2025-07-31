@@ -13,5 +13,6 @@ public class CoreInit implements Listener {
             return;
         }
         Core.initCore();
+        Core.initCoreShellBlock();
     }
 }
