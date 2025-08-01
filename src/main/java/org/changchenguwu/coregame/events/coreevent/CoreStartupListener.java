@@ -18,6 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.changchenguwu.coregame.corestate.Core;
 import org.changchenguwu.coregame.display.ScreenManager;
 import org.changchenguwu.coregame.events.myevents.CoreStartupEvent;
+import org.changchenguwu.coregame.events.myevents.temperature.TemperatureNormalEvent;
 import org.changchenguwu.coregame.main;
 import org.changchenguwu.coregame.variable.CoreTemperature;
 
@@ -27,7 +28,7 @@ import java.util.Random;
 
 public class CoreStartupListener implements Listener {
 
-    private int refreshRate;
+    private static int refreshRate;
 
     @EventHandler
     public void startupCore(PlayerInteractEvent event) {
@@ -57,6 +58,7 @@ public class CoreStartupListener implements Listener {
     @EventHandler
     public void onCoreStartup(CoreStartupEvent event) {
         Player player = event.getPlayer();
+
         YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(),"message.yml"));
         if (!Core.isCouldStart()) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
@@ -78,12 +80,15 @@ public class CoreStartupListener implements Listener {
         player.sendMessage(Objects.requireNonNull(config.getString("core_start_success")));
         Core.setIsStartup(true);
 
+
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 calculateTemp();
             }
         }.runTaskTimer(JavaPlugin.getPlugin(main.class), 10L,refreshRate);
+        Bukkit.getPluginManager().callEvent(new TemperatureNormalEvent());
     }
 
     @EventHandler

@@ -38,7 +38,6 @@ public class CoreReadyListener implements Listener {
                         if (screenId == 4) {
                             if (!Core.isCouldStart()) {
 
-                                PowerOnLightingAnimation.init();
                                 PowerOnLightingAnimation.animation(JavaPlugin.getPlugin(main.class));
 
                                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1, 1);

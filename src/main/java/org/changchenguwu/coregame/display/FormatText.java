@@ -25,8 +25,8 @@ public class FormatText {
         TemperatureStatus status = CoreTemperature.getTemperatureStatusAndCallEvent();
         String temperature = CoreTemperature.getCoreTemperatureFormat();
         return switch (status) {
-            case FREEZE -> "§b" + temperature; // 蓝色
-            case SUPERCOOL -> "§9" + temperature; // 深蓝色
+            case FREEZE -> "§9" + temperature; // 蓝色
+            case SUPERCOOL -> "§b" + temperature; // 深蓝色
             case NORMAL -> "§a" + temperature; // 绿色
             case OVERHEAT -> "§6" + temperature; // 金色/橙色
             case CRITICAL -> "§c" + temperature; // 红色

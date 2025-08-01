@@ -17,6 +17,7 @@ public class Core {
     private static Location coreLocation;
     private static boolean isStartup = false;
     private static boolean couldStart = false;
+
     private static Block[] coreShellBlock;
 
     public static boolean isIsStartup() {
@@ -86,5 +87,9 @@ public class Core {
         block[13] = coreLocation.getBlock().getRelative(0, -2, 0);
 
         coreShellBlock = block;
+    }
+
+    public static Block[] getCoreShellBlock() {
+        return coreShellBlock;
     }
 }
