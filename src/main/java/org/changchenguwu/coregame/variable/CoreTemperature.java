@@ -13,8 +13,12 @@ public class CoreTemperature {
         coreTemperature -= temperature;
     }
 
-    public static String getCoreTemperature() {
+    public static String getCoreTemperatureFormat() {
         return coreTemperature +"°C";
+    }
+
+    public static int getCoreTemperature() {
+        return coreTemperature;
     }
 
     public static TemperatureStatus getTemperatureStatus() {

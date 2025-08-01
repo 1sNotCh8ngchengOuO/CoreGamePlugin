@@ -15,4 +15,12 @@ public class CoreInit implements Listener {
         Core.initCore();
         Core.initCoreShellBlock();
     }
+
+//    @EventHandler
+//    public void onPluginDisable(PluginDisableEvent event) {
+//        if (!"CoreGame".equals(event.getPlugin().getName())) {
+//            return;
+//        }
+//        PowerOnLightingAnimation.restoreAnimation(JavaPlugin.getPlugin(main.class));
+//    }
 }

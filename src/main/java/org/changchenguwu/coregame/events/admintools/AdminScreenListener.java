@@ -48,7 +48,7 @@ public class AdminScreenListener implements Listener {
             }
             event.setCancelled(true);
             Location location = block.getLocation().clone();
-            String locationM = Objects.requireNonNull(location.getWorld()).getName() +","+ location.getX() +","+ location.getY()+","+location.getZ();
+            String locationM = "\""+ Objects.requireNonNull(location.getWorld()).getName() +"\"" +","+ location.getX() +","+ location.getY()+","+location.getZ();
             BaseComponent message = new TextComponent("§a方块信息:\n"+locationM);
             message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new Text(locationM)));
             message.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, locationM));

@@ -44,6 +44,8 @@ public final class main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new SelectTeamListener() , this);
         Bukkit.getPluginManager().registerEvents(new CoreReadyListener(),this);
         Objects.requireNonNull(Bukkit.getPluginCommand("screenshake")).setExecutor(new ScreenShakeCommand(this));
+        Objects.requireNonNull(Bukkit.getPluginCommand("restorelightanimation")).setExecutor(new RestoreLightAnimationCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("lightanimation")).setExecutor(new LightAnimationCommand());
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }

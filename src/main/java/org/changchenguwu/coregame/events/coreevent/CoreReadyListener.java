@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.changchenguwu.coregame.corestate.Core;
 import org.changchenguwu.coregame.display.ScreenManager;
+import org.changchenguwu.coregame.effects.PowerOnLightingAnimation;
 import org.changchenguwu.coregame.main;
 
 public class CoreReadyListener implements Listener {
@@ -36,7 +37,10 @@ public class CoreReadyListener implements Listener {
                         int screenId = ScreenManager.uuid.get(textDisplay.getUniqueId());
                         if (screenId == 4) {
                             if (!Core.isCouldStart()) {
-                                Core.setCouldStart(true);
+
+                                PowerOnLightingAnimation.init();
+                                PowerOnLightingAnimation.animation(JavaPlugin.getPlugin(main.class));
+
                                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1, 1);
                                 new BukkitRunnable() {
                                     @Override

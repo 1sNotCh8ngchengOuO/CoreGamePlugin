@@ -65,6 +65,16 @@ commands:
     usage: '/<command> [start <强度> <持续时间(秒)>] or /<command> stop'
     permission: coregame.command.screenshake
     permission-message: '§c需要管理员权限'
+  restorelightanimation:
+    description: 'Restore the lighting animation'
+    usage: '/restorelightanimation'
+    permission: coregame.command.restorelightanimation
+    permission-message: 'You do not have permission to use this command.'
+  lightanimation:
+    description: 'The lighting animation'
+    usage: '/lightanimation'
+    permission: coregame.command.lightanimation
+    permission-message: 'You do not have permission to use this command.'
 
 
 permissions:
@@ -88,4 +98,10 @@ permissions:
     default: op
   coregame.command.stools:
     description: 'Allows the player to use the stools command.'
+    default: op
+  coregame.command.restorelightanimation:
+    description: 'Allows the player to use the restorelightanimation command.'
+    default: op
+  coregame.command.lightanimation:
+    description: 'The lighting animation'
     default: op
