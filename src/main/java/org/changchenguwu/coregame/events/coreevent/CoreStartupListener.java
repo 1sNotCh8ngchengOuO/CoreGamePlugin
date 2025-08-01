@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TextDisplay;
@@ -18,9 +19,11 @@ import org.changchenguwu.coregame.corestate.Core;
 import org.changchenguwu.coregame.display.ScreenManager;
 import org.changchenguwu.coregame.events.myevents.CoreStartupEvent;
 import org.changchenguwu.coregame.main;
+import org.changchenguwu.coregame.variable.CoreTemperature;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.Random;
 
 public class CoreStartupListener implements Listener {
 
@@ -73,5 +76,34 @@ public class CoreStartupListener implements Listener {
         }.runTaskLater(JavaPlugin.getPlugin(main.class), 10L);
         player.sendMessage(Objects.requireNonNull(config.getString("core_start_success")));
         Core.setIsStartup(true);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                calculateTemp();
+            }
+        }.runTaskTimer(JavaPlugin.getPlugin(main.class), 10L,10L);
+    }
+
+    @EventHandler
+    public void randomTemp(CoreStartupEvent event) {
+        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "CoreSetting.yml"));
+        ConfigurationSection configurationSection = configuration.getConfigurationSection("CoreTemperatureAddition");
+        if (configurationSection != null) {
+            int min = configurationSection.getInt("min",5);
+            int max = configurationSection.getInt("max", 300);
+            Random random = new Random();
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    CoreTemperature.heatUpTemp = random.nextInt(max - min + 1) + min;
+                }
+            }.runTaskTimer(JavaPlugin.getPlugin(main.class), 20L, 10L);
+        }
+
+    }
+
+    public static void calculateTemp(){
+        CoreTemperature.addTemperature(CoreTemperature.heatUpTemp);
     }
 }

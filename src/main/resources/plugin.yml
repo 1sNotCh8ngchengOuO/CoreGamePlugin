@@ -75,6 +75,11 @@ commands:
     usage: '/lightanimation'
     permission: coregame.command.lightanimation
     permission-message: 'You do not have permission to use this command.'
+  debugsound:
+    description: 'Plays a sound at a specified location for debugging'
+    usage: '/debugsound <sound_name> <volume> <pitch> <world,x,y,z>'
+    permission: coregame.command.debugsound
+    permission-message: 'You do not have permission to use this command.'
 
 
 permissions:
@@ -104,4 +109,7 @@ permissions:
     default: op
   coregame.command.lightanimation:
     description: 'The lighting animation'
+    default: op
+  coregame.command.debugsound:
+    description: 'Allows the player to use the debugsound command.'
     default: op

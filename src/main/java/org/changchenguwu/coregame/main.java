@@ -46,6 +46,7 @@ public final class main extends JavaPlugin {
         Objects.requireNonNull(Bukkit.getPluginCommand("screenshake")).setExecutor(new ScreenShakeCommand(this));
         Objects.requireNonNull(Bukkit.getPluginCommand("restorelightanimation")).setExecutor(new RestoreLightAnimationCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("lightanimation")).setExecutor(new LightAnimationCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("debugsound")).setExecutor(new PlaySoundCommand());
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }

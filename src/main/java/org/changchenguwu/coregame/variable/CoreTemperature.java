@@ -4,6 +4,7 @@ import org.changchenguwu.coregame.corestate.TemperatureStatus;
 
 public class CoreTemperature {
     private static int coreTemperature = 30;
+    public static int heatUpTemp;
 
     public static void addTemperature(int temperature) {
         coreTemperature += temperature;
@@ -26,7 +27,7 @@ public class CoreTemperature {
             return TemperatureStatus.FREEZE;
         } else if (coreTemperature <= 0) {
             return TemperatureStatus.SUPERCOOL;
-        } else if (coreTemperature <= 300) {
+        } else if (coreTemperature <= 3000) {
             return TemperatureStatus.NORMAL;
         } else if (coreTemperature <= 6000) {
             return TemperatureStatus.OVERHEAT;

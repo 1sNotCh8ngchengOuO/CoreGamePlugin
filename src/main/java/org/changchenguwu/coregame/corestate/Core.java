@@ -9,7 +9,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.main;
-import org.changchenguwu.coregame.variable.CoreTemperature;
 
 import java.io.File;
 
@@ -19,7 +18,6 @@ public class Core {
     private static boolean isStartup = false;
     private static boolean couldStart = false;
     private static Block[] coreShellBlock;
-    private static TemperatureStatus temperatureStatus = TemperatureStatus.NORMAL;
 
     public static boolean isIsStartup() {
         return isStartup;
@@ -33,11 +31,12 @@ public class Core {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "CoreSetting.yml"));
         ConfigurationSection locationSection = config.getConfigurationSection("location");
         if (locationSection != null) {
-            World world = Bukkit.getWorld(locationSection.getString("location.world","world"));
-            double x = locationSection.getDouble("location.x");
-            double y = locationSection.getDouble("location.y");
-            double z = locationSection.getDouble("location.z");
+            World world = Bukkit.getWorld(locationSection.getString("world","world"));
+            double x = locationSection.getDouble("x");
+            double y = locationSection.getDouble("y");
+            double z = locationSection.getDouble("z");
             coreLocation = new Location(world,x,y,z);
+            Bukkit.getServer().broadcastMessage(coreLocation.toString());
         }
     }
 
@@ -87,25 +86,5 @@ public class Core {
         block[13] = coreLocation.getBlock().getRelative(0, -2, 0);
 
         coreShellBlock = block;
-    }
-
-    public static void setCoreStatus() {
-        if (CoreTemperature.getCoreTemperature() <= -273) {
-            temperatureStatus = TemperatureStatus.FREEZE;
-        } else if (CoreTemperature.getCoreTemperature() <= 0) {
-            temperatureStatus = TemperatureStatus.SUPERCOOL;
-        } else if (CoreTemperature.getCoreTemperature() <= 300) {
-            temperatureStatus = TemperatureStatus.NORMAL;
-        } else if (CoreTemperature.getCoreTemperature() <= 6000) {
-            temperatureStatus = TemperatureStatus.OVERHEAT;
-        } else if (CoreTemperature.getCoreTemperature() <= 10000) {
-            temperatureStatus = TemperatureStatus.CRITICAL;
-        } else {
-            temperatureStatus = TemperatureStatus.MELTDOWN;
-        }
-    }
-
-    public static TemperatureStatus getCoreStatus() {
-        return temperatureStatus;
     }
 }

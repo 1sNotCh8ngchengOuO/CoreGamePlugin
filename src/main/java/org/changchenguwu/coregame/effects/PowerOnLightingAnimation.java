@@ -133,26 +133,32 @@ public class PowerOnLightingAnimation {
         allBlocks.add(BLOCK7);
         allBlocks.add(BLOCK8);
 
-        new BukkitRunnable() {
-            int currentBlockListIndex = 0;
-
+        new BukkitRunnable(){
             @Override
             public void run() {
-                if (currentBlockListIndex >= allBlocks.size()) {
-                    Objects.requireNonNull(Core.getCoreLocation().getWorld()).playSound(Core.getCoreLocation(), Sound.BLOCK_NOTE_BLOCK_BELL,3,7);
-                    Core.setCouldStart(true);
-                    this.cancel();
-                    return;
-                }
 
-                List<Block> blocksToLight = allBlocks.get(currentBlockListIndex);
-                for (Block block : blocksToLight) {
-                    block.setType(Material.SEA_LANTERN);
-                }
-                currentBlockListIndex++;
-                Objects.requireNonNull(Core.getCoreLocation().getWorld()).playSound(Core.getCoreLocation(), Sound.ENTITY_SPLASH_POTION_THROW,3,1);
+                new BukkitRunnable() {
+                    int currentBlockListIndex = 0;
+                    @Override
+                    public void run() {
+                        if (currentBlockListIndex >= allBlocks.size()) {
+                            Objects.requireNonNull(Core.getCoreLocation().getWorld()).playSound(Core.getCoreLocation(), Sound.BLOCK_NOTE_BLOCK_BELL,3,7);
+                            Core.setCouldStart(true);
+                            this.cancel();
+                            return;
+                        }
+
+                        List<Block> blocksToLight = allBlocks.get(currentBlockListIndex);
+                        for (Block block : blocksToLight) {
+                            block.setType(Material.SEA_LANTERN);
+                        }
+                        currentBlockListIndex++;
+                        Objects.requireNonNull(Core.getCoreLocation().getWorld()).playSound(Core.getCoreLocation(), Sound.BLOCK_PISTON_EXTEND,3,1);
+                    }
+                }.runTaskTimer(plugin, 0L, 10L);
+
             }
-        }.runTaskTimer(plugin, 0L, 10L);
+        }.runTaskLater(plugin,20L);
     }
 
     public static void restoreAnimation(JavaPlugin plugin) {
