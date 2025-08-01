@@ -22,7 +22,7 @@ public class FormatText {
     }
 
     private static String getColoredCoreTemperature() {
-        TemperatureStatus status = CoreTemperature.getTemperatureStatus();
+        TemperatureStatus status = CoreTemperature.getTemperatureStatusAndCallEvent();
         String temperature = CoreTemperature.getCoreTemperatureFormat();
         return switch (status) {
             case FREEZE -> "§b" + temperature; // 蓝色

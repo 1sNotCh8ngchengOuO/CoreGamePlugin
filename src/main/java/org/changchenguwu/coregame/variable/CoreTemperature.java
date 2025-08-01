@@ -5,7 +5,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.corestate.TemperatureStatus;
-import org.changchenguwu.coregame.events.temperature.*;
+import org.changchenguwu.coregame.events.myevents.temperature.*;
 import org.changchenguwu.coregame.main;
 
 import java.io.File;
@@ -46,7 +46,7 @@ public class CoreTemperature {
         return coreTemperature;
     }
 
-    public static TemperatureStatus getTemperatureStatus() {
+    public static TemperatureStatus getTemperatureStatusAndCallEvent() {
         TemperatureStatus currentStatus;
         if (coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.FREEZE, -273)) {
             currentStatus = TemperatureStatus.FREEZE;
