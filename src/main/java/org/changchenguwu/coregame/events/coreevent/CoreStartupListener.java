@@ -27,6 +27,7 @@ import java.util.Random;
 
 public class CoreStartupListener implements Listener {
 
+    private int refreshRate;
 
     @EventHandler
     public void startupCore(PlayerInteractEvent event) {
@@ -82,7 +83,7 @@ public class CoreStartupListener implements Listener {
             public void run() {
                 calculateTemp();
             }
-        }.runTaskTimer(JavaPlugin.getPlugin(main.class), 10L,10L);
+        }.runTaskTimer(JavaPlugin.getPlugin(main.class), 10L,refreshRate);
     }
 
     @EventHandler
@@ -93,6 +94,8 @@ public class CoreStartupListener implements Listener {
             int min = configurationSection.getInt("min",5);
             int max = configurationSection.getInt("max", 300);
             Random random = new Random();
+            refreshRate = Objects.requireNonNull(configuration.getConfigurationSection("CoreTemperatureRefreshRate")).getInt("rate", 10);
+
             new BukkitRunnable() {
                 @Override
                 public void run() {

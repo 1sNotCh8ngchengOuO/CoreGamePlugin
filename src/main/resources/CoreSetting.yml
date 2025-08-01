@@ -8,3 +8,13 @@ location:
 CoreTemperatureAddition:
   min: 5
   max: 300
+
+CoreTemperatureRefreshRate:
+  rate: 40
+
+CoreStatusRange:
+  freeze: -273
+  supercool: 0
+  normal: 3000
+  overheat: 6000
+  critical: 10000

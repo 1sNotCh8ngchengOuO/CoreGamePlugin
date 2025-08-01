@@ -35,7 +35,7 @@ public class AdjustCoreTempCommand implements TabExecutor {
                     sender.sendMessage(ChatColor.RED + "无效操作，请使用 add 或 reduce");
                     return true;
             }
-            sender.sendMessage(ChatColor.GREEN + "核心温度已调整，当前温度: " + CoreTemperature.getCoreTemperatureFormat());
+            sender.sendMessage(ChatColor.GREEN +CoreTemperature.getCoreTemperatureFormat());
         } catch (NumberFormatException e) {
             sender.sendMessage(ChatColor.RED + "无效的数值格式");
         }
