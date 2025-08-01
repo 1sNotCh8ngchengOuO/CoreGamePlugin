@@ -30,11 +30,7 @@ public class Engineer {
     }
 
     public static void joinEngineerTeam(Player player) {
-        Scoreboard scoreboard = player.getScoreboard();
-        Team currentTeam = scoreboard.getEntryTeam(player.getName());
-        if (currentTeam != null) {
-            currentTeam.removeEntry(player.getName());
-        }
-        team.addEntry(player.getName());
+        // 使用TeamUtils添加玩家到团队并应用自定义NameTag
+        TeamUtils.addPlayerToTeam(player, team, ChatColor.GOLD + "[工程师]");
     }
 }

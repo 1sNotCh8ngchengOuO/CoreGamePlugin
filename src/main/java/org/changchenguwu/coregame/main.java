@@ -6,14 +6,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.commands.*;
 import org.changchenguwu.coregame.corestate.Core;
 import org.changchenguwu.coregame.display.PluginEventForScreenListener;
+import org.changchenguwu.coregame.display.Screen;
+import org.changchenguwu.coregame.display.ScreenManager;
 import org.changchenguwu.coregame.effects.CoreShellChangeListener;
 import org.changchenguwu.coregame.effects.PowerOnLightingAnimation;
 import org.changchenguwu.coregame.events.admintools.AdminScreenListener;
 import org.changchenguwu.coregame.events.coreevent.CoreReadyListener;
 import org.changchenguwu.coregame.events.coreevent.CoreStartupListener;
-import org.changchenguwu.coregame.events.myevents.CoreShutdownEvent;
 import org.changchenguwu.coregame.events.team.SelectTeamListener;
 import org.changchenguwu.coregame.events.team.TeamRegisterListener;
+import org.changchenguwu.coregame.nametag.NameTagManager;
 import org.changchenguwu.coregame.variable.CoreTemperature;
 import org.changchenguwu.coregame.variable.Placeholder;
 
@@ -29,8 +31,11 @@ public final class main extends JavaPlugin {
         saveResource("CoreSetting.yml", false);
         saveResource("InteractiveBlock.yml", false);
         saveResource("message.yml", false);
+        saveResource("nametags.yml", false);
+        
+        // 初始化NameTagManager
+        NameTagManager.init();
 
-        // Initialize core components early
         Core.initCore();
         Core.initCoreShellBlock();
         CoreTemperature.init();
@@ -57,6 +62,7 @@ public final class main extends JavaPlugin {
         Objects.requireNonNull(Bukkit.getPluginCommand("restorelightanimation")).setExecutor(new RestoreLightAnimationCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("lightanimation")).setExecutor(new LightAnimationCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("debugsound")).setExecutor(new PlaySoundCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("setnametag")).setExecutor(new SetNameTagCommand());
         Bukkit.getPluginManager().registerEvents(new CoreShellChangeListener(),this);
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
@@ -64,7 +70,7 @@ public final class main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bukkit.getPluginManager().callEvent(new CoreShutdownEvent());
+        ScreenManager.allScreens.values().forEach(Screen::remove);
         Bukkit.getScheduler().cancelTasks(this);
 
         Bukkit.getLogger().info(ChatColor.RED+"CoreGame插件已关闭");

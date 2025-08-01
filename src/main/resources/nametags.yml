@@ -1,0 +1,12 @@
+# 玩家自定义NameTag配置文件
+# 格式: 
+# players:
+#   <玩家UUID>:
+#     prefix: "前缀文本"
+#     suffix: "后缀文本"
+
+players:
+  # 示例配置
+  # 00000000-0000-0000-0000-000000000000:
+  #   prefix: "§6[VIP]"
+  #   suffix: "§e★"

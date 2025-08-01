@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.scoreboard.Team;
+import org.changchenguwu.coregame.nametag.NameTagManager;
 import org.changchenguwu.coregame.team.Engineer;
 import org.changchenguwu.coregame.team.Scientist;
 import org.changchenguwu.coregame.team.Security;

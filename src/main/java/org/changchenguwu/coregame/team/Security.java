@@ -30,13 +30,7 @@ public class Security{
     }
 
     public static void joinSecurityTeam(Player player) {
-        Scoreboard scoreboard = player.getScoreboard();
-
-        Team currentTeam = scoreboard.getEntryTeam(player.getName());
-        if (currentTeam != null) {
-            currentTeam.removeEntry(player.getName());
-        }
-
-        team.addEntry(player.getName());
+        // 使用TeamUtils添加玩家到团队并应用自定义NameTag
+        TeamUtils.addPlayerToTeam(player, team, ChatColor.DARK_GRAY + "[安保]");
     }
 }

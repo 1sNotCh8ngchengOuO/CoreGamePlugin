@@ -99,7 +99,7 @@ public class CoreStartupListener implements Listener {
             int min = configurationSection.getInt("min",5);
             int max = configurationSection.getInt("max", 300);
             Random random = new Random();
-            refreshRate = Objects.requireNonNull(configuration.getConfigurationSection("CoreTemperatureRefreshRate")).getInt("rate", 10);
+            refreshRate = Objects.requireNonNull(configuration.getConfigurationSection("CoreTemperatureRefreshRate")).getInt("rate");
 
             new BukkitRunnable() {
                 @Override

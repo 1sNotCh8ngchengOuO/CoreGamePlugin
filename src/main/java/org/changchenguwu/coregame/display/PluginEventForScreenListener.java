@@ -3,7 +3,6 @@ package org.changchenguwu.coregame.display;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 
 public class PluginEventForScreenListener implements Listener {
@@ -19,10 +18,5 @@ public class PluginEventForScreenListener implements Listener {
                     ScreenManager.uuid.put(spawnedDisplay.getUniqueId(), screen.getId());
                 });
         }
-    }
-
-    @EventHandler
-    public void onPluginDisable(PluginDisableEvent event) {
-        ScreenManager.allScreens.values().forEach(Screen::remove);
     }
 }
