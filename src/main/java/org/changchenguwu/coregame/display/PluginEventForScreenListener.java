@@ -10,13 +10,15 @@ public class PluginEventForScreenListener implements Listener {
 
     @EventHandler
     public void onPluginEnable(PluginEnableEvent event) {
-        ScreenManager.allScreens.values().stream()
-            .filter(screen -> screen instanceof Monitor)
-            .filter(monitor -> ((Monitor) monitor).isState())
-            .forEach(screen -> {
-                TextDisplay spawnedDisplay = screen.spawn();
-                ScreenManager.uuid.put(spawnedDisplay.getUniqueId(), screen.getId());
-            });
+        if("CoreGame".equals(event.getPlugin().getName())) {
+            ScreenManager.allScreens.values().stream()
+                .filter(screen -> screen instanceof Monitor)
+                .filter(monitor -> ((Monitor) monitor).isState())
+                .forEach(screen -> {
+                    TextDisplay spawnedDisplay = screen.spawn();
+                    ScreenManager.uuid.put(spawnedDisplay.getUniqueId(), screen.getId());
+                });
+        }
     }
 
     @EventHandler
