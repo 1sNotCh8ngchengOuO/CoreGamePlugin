@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.commands.*;
 import org.changchenguwu.coregame.corestate.Core;
-import org.changchenguwu.coregame.display.PluginEventForScreenListener;
+import org.changchenguwu.coregame.display.PluginEventForScreen;
 import org.changchenguwu.coregame.display.Screen;
 import org.changchenguwu.coregame.display.ScreenManager;
 import org.changchenguwu.coregame.effects.CoreShellChangeListener;
@@ -40,6 +40,9 @@ public final class main extends JavaPlugin {
         Core.initCoreShellBlock();
         CoreTemperature.init();
         PowerOnLightingAnimation.init();
+        ScreenManager.loadScreens();
+        ScreenManager.loadSpecialText();
+        PluginEventForScreen.spawnAllScreens();
 
         Objects.requireNonNull(Bukkit.getPluginCommand("stools")).setExecutor(new GetScreenToolsCommand());
         Bukkit.getPluginManager().registerEvents(new AdminScreenListener(),this);
@@ -55,7 +58,6 @@ public final class main extends JavaPlugin {
 
         Objects.requireNonNull(Bukkit.getPluginCommand("startupcore")).setExecutor(new CoreStartupCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("coretemp")).setExecutor(new AdjustCoreTempCommand());
-        Bukkit.getPluginManager().registerEvents(new PluginEventForScreenListener(),this);
         Bukkit.getPluginManager().registerEvents(new SelectTeamListener() , this);
         Bukkit.getPluginManager().registerEvents(new CoreReadyListener(),this);
         Objects.requireNonNull(Bukkit.getPluginCommand("screenshake")).setExecutor(new ScreenShakeCommand(this));

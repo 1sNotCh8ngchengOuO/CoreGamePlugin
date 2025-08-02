@@ -15,7 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
@@ -54,12 +53,6 @@ public class AdminScreenListener implements Listener {
             message.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, locationM));
             player.spigot().sendMessage(message);
         }
-    }
-
-    @EventHandler
-    public void onPluginEnable(PluginEnableEvent event) {
-        ScreenManager.loadScreens();
-        ScreenManager.loadSpecialText();
     }
 
     @EventHandler

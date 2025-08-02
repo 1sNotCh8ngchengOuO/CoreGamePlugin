@@ -143,7 +143,6 @@ public class Monitor implements Screen{
     public void remove() {
         if (textDisplay != null && !textDisplay.isDead()) {
             textDisplay.remove();
-            textDisplay = null;
         }
 
         if (task != null && !task.isCancelled()) {

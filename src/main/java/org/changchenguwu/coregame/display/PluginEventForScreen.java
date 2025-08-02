@@ -1,22 +1,16 @@
 package org.changchenguwu.coregame.display;
 
 import org.bukkit.entity.TextDisplay;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginEnableEvent;
 
-public class PluginEventForScreenListener implements Listener {
+public class PluginEventForScreen {
 
-    @EventHandler
-    public void onPluginEnable(PluginEnableEvent event) {
-        if("CoreGame".equals(event.getPlugin().getName())) {
-            ScreenManager.allScreens.values().stream()
+    public static void spawnAllScreens() {
+        ScreenManager.allScreens.values().stream()
                 .filter(screen -> screen instanceof Monitor)
                 .filter(monitor -> ((Monitor) monitor).isState())
                 .forEach(screen -> {
                     TextDisplay spawnedDisplay = screen.spawn();
                     ScreenManager.uuid.put(spawnedDisplay.getUniqueId(), screen.getId());
                 });
-        }
     }
 }
