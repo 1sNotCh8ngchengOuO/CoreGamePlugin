@@ -24,7 +24,7 @@ public class TeamUtils {
         team.addEntry(player.getName());
         
         // 应用自定义NameTag
-        NameTagData nameTagData = NameTagManager.getPlayerNameTag(player);
+        NameTagData nameTagData = NameTagManager.getPlayerNameTagData(player);
         if (!nameTagData.prefix().isEmpty() || !nameTagData.suffix().isEmpty()) {
             // 如果有自定义NameTag，则应用
             if (!nameTagData.prefix().isEmpty()) {

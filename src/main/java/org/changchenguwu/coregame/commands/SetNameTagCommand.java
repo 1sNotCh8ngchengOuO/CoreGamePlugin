@@ -34,7 +34,6 @@ public class SetNameTagCommand implements CommandExecutor {
             Team team = scoreboard.getEntryTeam(player.getName());
             if (team != null) {
                 // 重新加入团队以刷新NameTag
-                String teamName = team.getName();
                 team.removeEntry(player.getName());
                 team.addEntry(player.getName());
             }

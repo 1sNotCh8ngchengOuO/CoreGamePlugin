@@ -71,12 +71,12 @@ public class NameTagManager {
         saveNameTags();
     }
 
-    public static NameTagData getPlayerNameTag(Player player) {
+    public static NameTagData getPlayerNameTagData(Player player) {
         return PLAYER_NAME_TAGS.getOrDefault(player.getUniqueId(), new NameTagData("", ""));
     }
 
-    public static void applyNameTag(Player player, Team team) {
-        NameTagData nameTagData = getPlayerNameTag(player);
+    public static void applyNameTag(Player player, Team team) {//用于指令、内部实现调用
+        NameTagData nameTagData = getPlayerNameTagData(player);
         String teamPrefix = team.getPrefix();
 
         // 应用前缀和后缀
