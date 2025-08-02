@@ -39,6 +39,7 @@ public final class main extends JavaPlugin {
         Core.initCore();
         Core.initCoreShellBlock();
         CoreTemperature.init();
+        CoreStartupListener.initTempMaxMin();
         PowerOnLightingAnimation.init();
         ScreenManager.loadScreens();
         ScreenManager.loadSpecialText();

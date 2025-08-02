@@ -29,6 +29,8 @@ import java.util.Random;
 public class CoreStartupListener implements Listener {
 
     private static int refreshRate;
+    private static int min;
+    private static int max;
 
     @EventHandler
     public void startupCore(PlayerInteractEvent event) {
@@ -93,22 +95,25 @@ public class CoreStartupListener implements Listener {
 
     @EventHandler
     public void randomTemp(CoreStartupEvent event) {
+        Random random = new Random();
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                CoreTemperature.heatUpTemp = random.nextInt(max - min + 1) + min;
+                //未来添加更多温度变化逻辑
+            }
+        }.runTaskTimer(JavaPlugin.getPlugin(main.class), 20L, 10L);
+    }
+
+    public static void initTempMaxMin() {
         YamlConfiguration configuration = YamlConfiguration.loadConfiguration(new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "CoreSetting.yml"));
         ConfigurationSection configurationSection = configuration.getConfigurationSection("CoreTemperatureAddition");
         if (configurationSection != null) {
-            int min = configurationSection.getInt("min",5);
-            int max = configurationSection.getInt("max", 300);
-            Random random = new Random();
+            min = configurationSection.getInt("min",5);
+            max = configurationSection.getInt("max", 300);
             refreshRate = Objects.requireNonNull(configuration.getConfigurationSection("CoreTemperatureRefreshRate")).getInt("rate");
-
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    CoreTemperature.heatUpTemp = random.nextInt(max - min + 1) + min;
-                }
-            }.runTaskTimer(JavaPlugin.getPlugin(main.class), 20L, 10L);
         }
-
     }
 
     public static void calculateTemp(){
