@@ -50,13 +50,13 @@ public class CoreTemperature {
         TemperatureStatus currentStatus;
         if (coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.FREEZE, -273)) {
             currentStatus = TemperatureStatus.FREEZE;
-        } else if (coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.SUPERCOOL, 0)) {
+        } else if (coreTemperature > TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.FREEZE, -273) && coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.SUPERCOOL, 0)) {
             currentStatus = TemperatureStatus.SUPERCOOL;
-        } else if (coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.NORMAL, 3000)) {
+        } else if (coreTemperature > TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.SUPERCOOL, 0) && coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.NORMAL, 3000)) {
             currentStatus = TemperatureStatus.NORMAL;
-        } else if (coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.OVERHEAT, 6000)) {
+        } else if (coreTemperature > TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.NORMAL, 3000) && coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.OVERHEAT, 6000)) {
             currentStatus = TemperatureStatus.OVERHEAT;
-        } else if (coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.CRITICAL, 10000)) {
+        } else if (coreTemperature > TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.OVERHEAT, 6000) && coreTemperature <= TEMPERATURE_THRESHOLDS.getOrDefault(TemperatureStatus.CRITICAL, 10000)) {
             currentStatus = TemperatureStatus.CRITICAL;
         } else {
             currentStatus = TemperatureStatus.MELTDOWN;
