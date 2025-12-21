@@ -85,6 +85,11 @@ commands:
     usage: '/setnametag <前缀> [后缀] 或 /setnametag reset'
     permission: coregame.command.setnametag
     permission-message: '§c你没有权限使用此命令。'
+  adminstacks:
+    description: '全物品'
+    usage: '/adminstacks'
+    permission: coregame.command.adminstacks
+    permission-message: '§c你没有权限使用此命令。'
 
 
 permissions:
@@ -121,3 +126,6 @@ permissions:
   coregame.command.setnametag:
     description: '允许玩家设置自定义NameTag'
     default: true
+  coregame.command.adminstacks:
+    description: '全物品'
+    default: op

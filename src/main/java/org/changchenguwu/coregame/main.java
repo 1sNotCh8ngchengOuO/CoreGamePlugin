@@ -11,6 +11,7 @@ import org.changchenguwu.coregame.display.ScreenManager;
 import org.changchenguwu.coregame.effects.CoreShellChangeListener;
 import org.changchenguwu.coregame.effects.PowerOnLightingAnimation;
 import org.changchenguwu.coregame.events.admintools.AdminScreenListener;
+import org.changchenguwu.coregame.events.admintools.AdminStackListener;
 import org.changchenguwu.coregame.events.coreevent.CoreReadyListener;
 import org.changchenguwu.coregame.events.coreevent.CoreStartupListener;
 import org.changchenguwu.coregame.events.team.SelectTeamListener;
@@ -57,7 +58,6 @@ public final class main extends JavaPlugin {
         }
         Objects.requireNonNull(Bukkit.getPluginCommand("changeteam")).setExecutor(new ChangeTeamCommand());
         Bukkit.getPluginManager().registerEvents(new TeamRegisterListener(),this);
-        Bukkit.getPluginManager().registerEvents(new SelectTeamListener(),this);
         Bukkit.getPluginManager().registerEvents(new CoreStartupListener(),this);
 
         Objects.requireNonNull(Bukkit.getPluginCommand("startupcore")).setExecutor(new CoreStartupCommand());
@@ -70,6 +70,8 @@ public final class main extends JavaPlugin {
         Objects.requireNonNull(Bukkit.getPluginCommand("debugsound")).setExecutor(new PlaySoundCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("setnametag")).setExecutor(new SetNameTagCommand());
         Bukkit.getPluginManager().registerEvents(new CoreShellChangeListener(),this);
+        Bukkit.getPluginManager().registerEvents(new AdminStackListener(),this);
+        Objects.requireNonNull(Bukkit.getPluginCommand("adminstacks")).setExecutor(new GetAllPluginItems());
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }
