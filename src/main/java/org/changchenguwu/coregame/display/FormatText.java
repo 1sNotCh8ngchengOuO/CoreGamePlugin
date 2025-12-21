@@ -16,7 +16,7 @@ public class FormatText {
         Date date = new Date();
 
         return text
-                .replace("<data>",formatter.format(date))
+                .replace("<date>",formatter.format(date))
                 .replace("<coretemp>", getColoredCoreTemperature())
                 .replace("<corestartinfo>", Core.getCoreStartupInfo());
     }

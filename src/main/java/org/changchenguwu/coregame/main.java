@@ -22,6 +22,9 @@ import org.changchenguwu.coregame.variable.Placeholder;
 import java.util.Objects;
 
 public final class main extends JavaPlugin {
+    public static JavaPlugin getPluginInstance() {
+        return getPlugin(main.class);
+    }
 
     @Override
     public void onEnable() {
