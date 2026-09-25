@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.events.interactive.permission;
+package org.changchenguwu.coregame.event.interactive.permission;
 
 public class PermissionTestToolPermission extends Permission {
     public static final PermissionTestToolPermission INSTANCE = new PermissionTestToolPermission();

@@ -1,6 +1,6 @@
 name: CoreGame
 version: '1.0'
-main: org/changchenguwu/coregame.CoreGame
+main: org.changchenguwu.coregame.CoreGame
 api-version: '1.20'
 depend: [ProtocolLib]
 softdepend: [PlaceholderAPI]

@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.event;
+package org.changchenguwu.coregame.event.coreevent;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;

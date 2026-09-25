@@ -3,7 +3,6 @@ package org.changchenguwu.coregame.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
-import org.changchenguwu.coregame.gui.PermissionCard;
 
 public class AllPluginItemsMenu {
     public static Inventory openAllPluginItemsUi() {
