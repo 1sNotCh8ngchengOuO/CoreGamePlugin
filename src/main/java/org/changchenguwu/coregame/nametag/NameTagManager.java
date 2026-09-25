@@ -4,7 +4,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Team;
-import org.changchenguwu.coregame.main;
+import org.changchenguwu.coregame.CoreGame;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +20,9 @@ public class NameTagManager {
 
     public static void init() {
         // 初始化配置文件
-        nameTagFile = new File(JavaPlugin.getPlugin(main.class).getDataFolder(), "nametags.yml");
+        nameTagFile = new File(JavaPlugin.getPlugin(CoreGame.class).getDataFolder(), "nametags.yml");
         if (!nameTagFile.exists()) {
-            JavaPlugin.getPlugin(main.class).saveResource("nametags.yml", false);
+            JavaPlugin.getPlugin(CoreGame.class).saveResource("nametags.yml", false);
         }
         nameTagConfig = YamlConfiguration.loadConfiguration(nameTagFile);
         loadNameTags();

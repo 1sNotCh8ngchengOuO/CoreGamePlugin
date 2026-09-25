@@ -1,8 +1,9 @@
 name: CoreGame
 version: '1.0'
-main: org.changchenguwu.coregame.main
+main: org/changchenguwu/coregame.CoreGame
 api-version: '1.20'
 depend: [ProtocolLib]
+softdepend: [PlaceholderAPI]
 
 #  §0：黑色
 #  §1：深蓝色
