@@ -31,6 +31,11 @@ softdepend: [PlaceholderAPI]
 
 
 commands:
+  breakprevent:
+    description: 'Set break prevent'
+    usage: '/breakprevent <true|false>'
+    permission: coregame.command.breakprevent
+    permission-message: '§c需要管理员权限'
   startupcore:
     description: 'Startup the core'
     usage: '/startupcore'
@@ -94,6 +99,9 @@ commands:
 
 
 permissions:
+  coregame.command.breakprevent:
+    description: '允许玩家设置是否防止玩家破坏块'
+    default: op
   coregame.command.startupcore:
     description: 'Allows the player to use the startupcore command.'
     default: op

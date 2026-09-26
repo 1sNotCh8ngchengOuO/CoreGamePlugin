@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.screen;
+package org.changchenguwu.coregame.item;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.command.LoadAllScreenCommand;
-import org.changchenguwu.coregame.screen.AdminScreenListener;
+import org.changchenguwu.coregame.gui.guilistener.AdminScreenListener;
 import org.changchenguwu.coregame.CoreGame;
 
 import java.util.List;

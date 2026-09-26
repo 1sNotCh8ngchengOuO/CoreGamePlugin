@@ -12,9 +12,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.changchenguwu.coregame.core.Core;
 import org.changchenguwu.coregame.screen.ScreenManager;
-import org.changchenguwu.coregame.screen.PowerOnLightingAnimation;
+import org.changchenguwu.coregame.effect.PowerOnLightingAnimation;
 import org.changchenguwu.coregame.CoreGame;
 
 public class CoreReadyListener implements Listener {

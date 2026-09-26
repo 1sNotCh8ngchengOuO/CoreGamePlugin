@@ -1,10 +1,10 @@
-package org.changchenguwu.coregame.gui;
+package org.changchenguwu.coregame.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.changchenguwu.coregame.gui.AllPluginItemsMenu;
+import org.changchenguwu.coregame.gui.guibuilder.AllPluginItemsMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

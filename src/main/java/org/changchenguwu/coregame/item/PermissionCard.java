@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.gui;
+package org.changchenguwu.coregame.item;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

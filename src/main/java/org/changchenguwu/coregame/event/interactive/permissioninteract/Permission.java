@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.event.interactive.permission;
+package org.changchenguwu.coregame.event.interactive.permissioninteract;
 
 public abstract class Permission {
     private final String PERMISSION_FIELD;

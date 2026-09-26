@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.gui;
+package org.changchenguwu.coregame.gui.guilistener;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

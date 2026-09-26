@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.changchenguwu.coregame.screen.ScreenShakeEffect;
+import org.changchenguwu.coregame.effect.ScreenShakeEffect;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

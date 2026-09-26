@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.screen;
+package org.changchenguwu.coregame.effect;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;

@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.screen;
+package org.changchenguwu.coregame.gui.guilistener;
 
 import de.rapha149.signgui.SignGUI;
 import de.rapha149.signgui.exception.SignGUIVersionException;
@@ -19,7 +19,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.changchenguwu.coregame.screen.ScreenManager;
-import org.changchenguwu.coregame.screen.ScreenToolItems;
+import org.changchenguwu.coregame.item.ScreenToolItems;
 
 import java.util.Objects;
 

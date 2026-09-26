@@ -1,4 +1,4 @@
-package org.changchenguwu.coregame.screen;
+package org.changchenguwu.coregame.effect;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;

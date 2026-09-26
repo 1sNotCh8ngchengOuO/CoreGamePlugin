@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.changchenguwu.coregame.screen.PowerOnLightingAnimation;
+import org.changchenguwu.coregame.effect.PowerOnLightingAnimation;
 import org.changchenguwu.coregame.CoreGame;
 
 public class LightAnimationCommand implements CommandExecutor {

@@ -8,11 +8,11 @@ import org.changchenguwu.coregame.core.Core;
 import org.changchenguwu.coregame.screen.ScreenSpawner;
 import org.changchenguwu.coregame.screen.Screen;
 import org.changchenguwu.coregame.screen.ScreenManager;
-import org.changchenguwu.coregame.screen.CoreShellChangeListener;
-import org.changchenguwu.coregame.screen.PowerOnLightingAnimation;
-import org.changchenguwu.coregame.screen.AdminScreenListener;
-import org.changchenguwu.coregame.gui.AllPluginItemsCommand;
-import org.changchenguwu.coregame.gui.AdminStackListener;
+import org.changchenguwu.coregame.effect.CoreShellChangeListener;
+import org.changchenguwu.coregame.effect.PowerOnLightingAnimation;
+import org.changchenguwu.coregame.gui.guilistener.AdminScreenListener;
+import org.changchenguwu.coregame.command.AllPluginItemsCommand;
+import org.changchenguwu.coregame.gui.guilistener.AdminStackListener;
 import org.changchenguwu.coregame.core.CoreReadyListener;
 import org.changchenguwu.coregame.core.CoreStartupListener;
 import org.changchenguwu.coregame.team.SelectTeamListener;
@@ -73,6 +73,7 @@ public final class CoreGame extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new CoreShellChangeListener(),this);
         Bukkit.getPluginManager().registerEvents(new AdminStackListener(),this);
         Objects.requireNonNull(Bukkit.getPluginCommand("adminstacks")).setExecutor(new AllPluginItemsCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("breakprevent")).setExecutor(new BreakPreventCommand());
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }

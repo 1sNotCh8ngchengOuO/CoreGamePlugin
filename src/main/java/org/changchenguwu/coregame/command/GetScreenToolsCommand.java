@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.changchenguwu.coregame.screen.ScreenToolItems;
+import org.changchenguwu.coregame.item.ScreenToolItems;
 
 import java.util.List;
 
