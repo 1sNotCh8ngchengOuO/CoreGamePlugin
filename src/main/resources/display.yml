@@ -9,10 +9,10 @@ Screen:
         pitch: -90
         yaw: 0
         location:
-            world: flat
-            x: -1373.0
-            y: -44.99
-            z: 288.0
+            world: coreworld
+            x: 23.0
+            y: 166.01
+            z: 63.0
         description: "核心初始化"
         text: "\n       §b初始化       \n\n"
         switchStrategy: SINGLE
@@ -25,10 +25,10 @@ Screen:
         pitch: -90
         yaw: 0
         location:
-            world: flat
-            x: -1376.0
-            y: -44.99
-            z: 288.0
+            world: coreworld
+            x: 20.0
+            y: 166.01
+            z: 63.0
         description: "核心启动信息"
         text: "     §a§l核心启动     \n\n§7State:\n§r<corestartinfo>"
         switchStrategy: SINGLE
@@ -39,12 +39,12 @@ Screen:
         type: Monitor
         billboard: FIXED
         pitch: 0
-        yaw: -90
+        yaw: 0
         location:
-            world: flat
-            x: -1381.0
-            y: -46.0
-            z: 289.0
+            world: coreworld
+            x: 13.0
+            y: 165.0
+            z: 63.0
         description: "核心温度"
         text: "§f§l=======================\n \n \n§8§l§o核心温度\n§r<coretemp>\n \n \n§f§l======================="
         switchStrategy: SINGLE
@@ -57,7 +57,7 @@ Screen:
         pitch: 0
         yaw: 0
         location:
-            world: flat
+            world: coreworld
             x: -1379.0
             y: -60.0
             z: 308.0
@@ -73,7 +73,7 @@ Screen:
         pitch: 0
         yaw: 0
         location:
-            world: flat
+            world: coreworld
             x: -1364
             y: -50
             z: 312

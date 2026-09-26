@@ -1,13 +1,13 @@
 #
 location:
-  world: "flat"
-  x: -1368.0
-  y: -46.0
-  z: 251.0
+  world: "coreworld"
+  x: 28.0
+  y: 165.0
+  z: 26.0
 
 CoreTemperatureAddition:
   min: 5
-  max: 300
+  max: 60
 
 CoreTemperatureRefreshRate:
   rate: 40

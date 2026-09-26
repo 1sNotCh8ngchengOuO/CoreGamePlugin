@@ -3,7 +3,7 @@
     state: true
     description: 核心开机
     location:
-        world: flat
-        x: -1377
-        y: -46
-        z: 287
+        world: coreworld
+        x: 20.0
+        y: 165.0
+        z: 63.0

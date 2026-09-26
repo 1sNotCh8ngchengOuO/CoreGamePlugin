@@ -6,7 +6,6 @@ import org.bukkit.block.Block;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.changchenguwu.coregame.core.Core;
-import org.changchenguwu.coregame.util.Locations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,92 +33,83 @@ public class PowerOnLightingAnimation {
         setBlock8();
     }
 
-    public static void setBlock1() {
-        BLOCK1.add(Locations.newLocation("flat",-1366.0,-56.0,251.0).getBlock());
-        BLOCK1.add(Locations.newLocation("flat",-1364.0,-56.0,251.0).getBlock());
-        BLOCK1.add(Locations.newLocation("flat",-1362.0,-56.0,251.0).getBlock());
-        BLOCK1.add(Locations.newLocation("flat",-1360.0,-56.0,251.0).getBlock());
+    private static final int[][] BLOCK1_OFFSETS = {
+            {2, -10, 0}, {4, -10, 0}, {6, -10, 0}, {8, -10, 0},
+            {2, 10, 0}, {4, 10, 0}, {6, 10, 0}, {8, 10, 0}
+    };
 
-        BLOCK1.add(Locations.newLocation("flat",-1366.0,-36.0,251.0).getBlock());
-        BLOCK1.add(Locations.newLocation("flat",-1364.0,-36.0,251.0).getBlock());
-        BLOCK1.add(Locations.newLocation("flat",-1362.0,-36.0,251.0).getBlock());
-        BLOCK1.add(Locations.newLocation("flat",-1360.0,-36.0,251.0).getBlock());
+    private static final int[][] BLOCK2_OFFSETS = {
+            {1, -10, -1}, {3, -10, -3}, {5, -10, -5},
+            {1, 10, -1}, {3, 10, -3}, {5, 10, -5}
+    };
+
+    private static final int[][] BLOCK3_OFFSETS = {
+            {0, -10, -2}, {0, -10, -4}, {0, -10, -6}, {0, -10, -8},
+            {0, 10, -2}, {0, 10, -4}, {0, 10, -6}, {0, 10, -8}
+    };
+
+    private static final int[][] BLOCK4_OFFSETS = {
+            {-5, -10, -5}, {-1, -10, -1}, {-3, -10, -3},
+            {-5, 10, -5}, {-1, 10, -1}, {-3, 10, -3}
+    };
+
+    private static final int[][] BLOCK5_OFFSETS = {
+            {-2, -10, 0}, {-4, -10, 0}, {-6, -10, 0}, {-8, -10, 0},
+            {-2, 10, 0}, {-4, 10, 0}, {-6, 10, 0}, {-8, 10, 0}
+    };
+
+    private static final int[][] BLOCK6_OFFSETS = {
+            {-5, -10, 5}, {-3, -10, 3}, {-1, -10, 1},
+            {-5, 10, 5}, {-3, 10, 3}, {-1, 10, 1}
+    };
+
+    private static final int[][] BLOCK7_OFFSETS = {
+            {0, -10, 8}, {0, -10, 6}, {0, -10, 4}, {0, -10, 2},
+            {0, 10, 8}, {0, 10, 6}, {0, 10, 4}, {0, 10, 2}
+    };
+
+    private static final int[][] BLOCK8_OFFSETS = {
+            {5, -10, 5}, {3, -10, 3}, {1, -10, 1},
+            {5, 10, 5}, {3, 10, 3}, {1, 10, 1}
+    };
+
+    public static void setBlock1() {
+        addBlocks(BLOCK1, BLOCK1_OFFSETS);
     }
 
     public static void setBlock2() {
-        BLOCK2.add(Locations.newLocation("flat",-1367.0,-56.0,250.0).getBlock());
-        BLOCK2.add(Locations.newLocation("flat", -1365.0, -56.0, 248.0).getBlock());
-        BLOCK2.add(Locations.newLocation("flat", -1363.0, -56.0, 246.0).getBlock());
-
-        BLOCK2.add(Locations.newLocation("flat",-1367.0,-36.0,250.0).getBlock());
-        BLOCK2.add(Locations.newLocation("flat", -1365.0, -36.0, 248.0).getBlock());
-        BLOCK2.add(Locations.newLocation("flat", -1363.0, -36.0, 246.0).getBlock());
+        addBlocks(BLOCK2, BLOCK2_OFFSETS);
     }
 
     public static void setBlock3() {
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -56.0, 249.0).getBlock());
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -56.0, 247.0).getBlock());
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -56.0, 245.0).getBlock());
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -56.0, 243.0).getBlock());
-
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -36.0, 249.0).getBlock());
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -36.0, 247.0).getBlock());
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -36.0, 245.0).getBlock());
-        BLOCK3.add(Locations.newLocation("flat", -1368.0, -36.0, 243.0).getBlock());
+        addBlocks(BLOCK3, BLOCK3_OFFSETS);
     }
 
     public static void setBlock4() {
-        BLOCK4.add(Locations.newLocation("flat",-1373.0,-56.0,246.0).getBlock());
-        BLOCK4.add(Locations.newLocation("flat",-1369.0,-56.0,250.0).getBlock());
-        BLOCK4.add(Locations.newLocation("flat",-1371.0,-56.0,248.0).getBlock());
-
-        BLOCK4.add(Locations.newLocation("flat",-1373.0,-36.0,246.0).getBlock());
-        BLOCK4.add(Locations.newLocation("flat",-1369.0,-36.0,250.0).getBlock());
-        BLOCK4.add(Locations.newLocation("flat",-1371.0,-36.0,248.0).getBlock());
+        addBlocks(BLOCK4, BLOCK4_OFFSETS);
     }
 
     public static void setBlock5() {
-        BLOCK5.add(Locations.newLocation("flat", -1370.0, -56.0, 251.0).getBlock());
-        BLOCK5.add(Locations.newLocation("flat",-1372.0,-56.0,251.0).getBlock());
-        BLOCK5.add(Locations.newLocation("flat",-1374.0,-56.0,251.0).getBlock());
-        BLOCK5.add(Locations.newLocation("flat",-1376.0,-56.0,251.0).getBlock());
-
-        BLOCK5.add(Locations.newLocation("flat", -1370.0, -36.0, 251.0).getBlock());
-        BLOCK5.add(Locations.newLocation("flat",-1372.0,-36.0,251.0).getBlock());
-        BLOCK5.add(Locations.newLocation("flat",-1374.0,-36.0,251.0).getBlock());
-        BLOCK5.add(Locations.newLocation("flat",-1376.0,-36.0,251.0).getBlock());
+        addBlocks(BLOCK5, BLOCK5_OFFSETS);
     }
 
     public static void setBlock6() {
-        BLOCK6.add(Locations.newLocation("flat",-1373.0,-56.0,256.0).getBlock());
-        BLOCK6.add(Locations.newLocation("flat",-1371.0,-56.0,254.0).getBlock());
-        BLOCK6.add(Locations.newLocation("flat",-1369.0,-56.0,252.0).getBlock());
-
-        BLOCK6.add(Locations.newLocation("flat",-1373.0,-36.0,256.0).getBlock());
-        BLOCK6.add(Locations.newLocation("flat",-1371.0,-36.0,254.0).getBlock());
-        BLOCK6.add(Locations.newLocation("flat",-1369.0,-36.0,252.0).getBlock());
+        addBlocks(BLOCK6, BLOCK6_OFFSETS);
     }
 
     public static void setBlock7() {
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-56.0,259.0).getBlock());
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-56.0,257.0).getBlock());
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-56.0,255.0).getBlock());
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-56.0,253.0).getBlock());
-
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-36.0,259.0).getBlock());
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-36.0,257.0).getBlock());
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-36.0,255.0).getBlock());
-        BLOCK7.add(Locations.newLocation("flat",-1368.0,-36.0,253.0).getBlock());
+        addBlocks(BLOCK7, BLOCK7_OFFSETS);
     }
 
     public static void setBlock8() {
-        BLOCK8.add(Locations.newLocation("flat",-1363.0,-56.0,256.0).getBlock());
-        BLOCK8.add(Locations.newLocation("flat",-1365.0,-56.0,254.0).getBlock());
-        BLOCK8.add(Locations.newLocation("flat",-1367.0,-56.0,252.0).getBlock());
+        addBlocks(BLOCK8, BLOCK8_OFFSETS);
+    }
 
-        BLOCK8.add(Locations.newLocation("flat",-1363.0,-36.0,256.0).getBlock());
-        BLOCK8.add(Locations.newLocation("flat",-1365.0,-36.0,254.0).getBlock());
-        BLOCK8.add(Locations.newLocation("flat",-1367.0,-36.0,252.0).getBlock());
+    private static void addBlocks(List<Block> blocks, int[][] offsets) {
+        Block coreBlock = Core.getCoreLocation().getBlock();
+        for (int[] offset : offsets) {
+            blocks.add(coreBlock.getRelative(offset[0], offset[1], offset[2]));
+        }
     }
 
     public static void animation(JavaPlugin plugin) {
@@ -153,7 +143,7 @@ public class PowerOnLightingAnimation {
                             block.setType(Material.SEA_LANTERN);
                         }
                         currentBlockListIndex++;
-                        Objects.requireNonNull(Core.getCoreLocation().getWorld()).playSound(Core.getCoreLocation(), Sound.BLOCK_PISTON_EXTEND,3,1);
+                        Objects.requireNonNull(Core.getCoreLocation().getWorld()).playSound(Core.getCoreLocation(), Sound.BLOCK_PISTON_EXTEND,10,1);
                     }
                 }.runTaskTimer(plugin, 0L, 10L);
 

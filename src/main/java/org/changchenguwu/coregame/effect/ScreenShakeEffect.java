@@ -9,8 +9,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -41,14 +44,34 @@ public class ScreenShakeEffect {
                 double offsetPitch = (random.nextDouble() * 2 - 1) * intensity * 5; // 增加抖动幅度
                 double offsetYaw = (random.nextDouble() * 2 - 1) * intensity * 5; // 增加抖动幅度
 
-                // 创建并发送位置数据包来模拟视角抖动
                 PacketContainer positionPacket = new PacketContainer(PacketType.Play.Server.POSITION);
-                positionPacket.getDoubles().write(0, originalLoc.getX());
-                positionPacket.getDoubles().write(1, originalLoc.getY());
-                positionPacket.getDoubles().write(2, originalLoc.getZ());
+
+
+                boolean rotationOnly = false;
+                Set relativeSet = positionPacket.getSpecificModifier(Set.class).readSafely(0);
+                if (relativeSet != null && RelativeMovement.isResolved()) {
+                    try {
+                        relativeSet.clear();
+                        relativeSet.add(RelativeMovement.X);
+                        relativeSet.add(RelativeMovement.Y);
+                        relativeSet.add(RelativeMovement.Z);
+                        rotationOnly = true;
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                if (rotationOnly) {
+                    positionPacket.getDoubles().write(0, 0.0);
+                    positionPacket.getDoubles().write(1, 0.0);
+                    positionPacket.getDoubles().write(2, 0.0);
+                } else {
+                    positionPacket.getDoubles().write(0, originalLoc.getX());
+                    positionPacket.getDoubles().write(1, originalLoc.getY());
+                    positionPacket.getDoubles().write(2, originalLoc.getZ());
+                }
+
                 positionPacket.getFloat().write(0, (float) (originalLoc.getYaw() + offsetYaw));
                 positionPacket.getFloat().write(1, (float) (originalLoc.getPitch() + offsetPitch));
-
 
                 try {
                     ProtocolLibrary.getProtocolManager().sendServerPacket(player, positionPacket);
@@ -80,6 +103,69 @@ public class ScreenShakeEffect {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private static final class RelativeMovement {
+
+        private static final Object X;
+        private static final Object Y;
+        private static final Object Z;
+
+        static {
+            Object x = null;
+            Object y = null;
+            Object z = null;
+
+            Class<?> enumClass = null;
+            try {
+                PacketContainer probe = new PacketContainer(PacketType.Play.Server.POSITION);
+                Set<?> probeSet = probe.getSpecificModifier(Set.class).readSafely(0);
+                if (probeSet != null && !probeSet.isEmpty()) {
+                    enumClass = ((Enum<?>) probeSet.iterator().next()).getDeclaringClass();
+                }
+            } catch (Throwable ignored) {
+            }
+
+            if (enumClass != null && enumClass.isEnum()) {
+                for (Method method : enumClass.getDeclaredMethods()) {
+                    if (method.getParameterCount() != 0 || method.getReturnType() != int.class
+                            || Modifier.isStatic(method.getModifiers())) {
+                        continue;
+                    }
+                    try {
+                        method.setAccessible(true);
+                        Object candidateX = null;
+                        Object candidateY = null;
+                        Object candidateZ = null;
+                        for (Object constant : enumClass.getEnumConstants()) {
+                            int mask = (Integer) method.invoke(constant);
+                            if (mask == 0x1) {
+                                candidateX = constant;
+                            } else if (mask == 0x2) {
+                                candidateY = constant;
+                            } else if (mask == 0x4) {
+                                candidateZ = constant;
+                            }
+                        }
+                        if (candidateX != null && candidateY != null && candidateZ != null) {
+                            x = candidateX;
+                            y = candidateY;
+                            z = candidateZ;
+                            break;
+                        }
+                    } catch (Throwable ignored) {
+                    }
+                }
+            }
+
+            X = x;
+            Y = y;
+            Z = z;
+        }
+
+        private static boolean isResolved() {
+            return X != null && Y != null && Z != null;
         }
     }
 }
