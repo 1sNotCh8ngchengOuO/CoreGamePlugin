@@ -11,6 +11,10 @@ public class BreakPreventListener implements Listener {
         BreakPreventListener.breakPrevent = breakPrevent;
     }
 
+    public static boolean isBreakPrevent() {
+        return breakPrevent;
+    }
+
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
         event.setCancelled(breakPrevent);

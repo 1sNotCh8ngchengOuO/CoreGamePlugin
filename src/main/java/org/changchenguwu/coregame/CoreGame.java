@@ -5,21 +5,23 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.changchenguwu.coregame.command.*;
 import org.changchenguwu.coregame.core.Core;
-import org.changchenguwu.coregame.screen.ScreenSpawner;
-import org.changchenguwu.coregame.screen.Screen;
-import org.changchenguwu.coregame.screen.ScreenManager;
-import org.changchenguwu.coregame.effect.CoreShellChangeListener;
-import org.changchenguwu.coregame.effect.PowerOnLightingAnimation;
-import org.changchenguwu.coregame.gui.guilistener.AdminScreenListener;
-import org.changchenguwu.coregame.command.AllPluginItemsCommand;
-import org.changchenguwu.coregame.gui.guilistener.AdminStackListener;
 import org.changchenguwu.coregame.core.CoreReadyListener;
 import org.changchenguwu.coregame.core.CoreStartupListener;
+import org.changchenguwu.coregame.core.CoreTemperature;
+import org.changchenguwu.coregame.effect.CoreShellChangeListener;
+import org.changchenguwu.coregame.effect.PowerOnLightingAnimation;
+import org.changchenguwu.coregame.event.commonevent.BreakPreventListener;
+import org.changchenguwu.coregame.event.commonevent.InteractPreventListener;
+import org.changchenguwu.coregame.event.commonevent.PlayerPreventPvpListener;
+import org.changchenguwu.coregame.gui.guilistener.AdminScreenListener;
+import org.changchenguwu.coregame.gui.guilistener.AdminStackListener;
+import org.changchenguwu.coregame.nametag.NameTagManager;
+import org.changchenguwu.coregame.placeholder.CoreGamePlaceholder;
+import org.changchenguwu.coregame.screen.Screen;
+import org.changchenguwu.coregame.screen.ScreenManager;
+import org.changchenguwu.coregame.screen.ScreenSpawner;
 import org.changchenguwu.coregame.team.SelectTeamListener;
 import org.changchenguwu.coregame.team.TeamRegisterListener;
-import org.changchenguwu.coregame.nametag.NameTagManager;
-import org.changchenguwu.coregame.core.CoreTemperature;
-import org.changchenguwu.coregame.placeholder.CoreGamePlaceholder;
 
 import java.util.Objects;
 
@@ -74,6 +76,9 @@ public final class CoreGame extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AdminStackListener(),this);
         Objects.requireNonNull(Bukkit.getPluginCommand("adminstacks")).setExecutor(new AllPluginItemsCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("breakprevent")).setExecutor(new BreakPreventCommand());
+        Bukkit.getPluginManager().registerEvents(new BreakPreventListener(),this);
+        Bukkit.getPluginManager().registerEvents(new PlayerPreventPvpListener(),this);
+        Bukkit.getPluginManager().registerEvents(new InteractPreventListener(),this);
 
         Bukkit.getLogger().info(ChatColor.GREEN+"CoreGame插件已启动");
     }
